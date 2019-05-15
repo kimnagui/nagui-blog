@@ -52,6 +52,17 @@ module.exports = {
 		},
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-sharp`,
+		// `gatsby-plugin-root-import`,
+		{
+			resolve: 'gatsby-plugin-root-import',
+			options: {
+				content: `${__dirname}/content`,
+			  	src: `${__dirname}/src`,
+			  	components: `${__dirname}/src/components`,
+				  pages: `${__dirname}/src/pages`,
+				  utils: `${__dirname}/src/utils`,
+			}
+		},
 		{
 			resolve: `gatsby-plugin-google-analytics`,
 			options: {
