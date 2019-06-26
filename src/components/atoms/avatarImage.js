@@ -1,8 +1,8 @@
 import React from "react";
-import { default as OriginAvatar } from "@material-ui/core/Avatar";
+import Avatar from "@material-ui/core/Avatar";
 import styled from "styled-components";
 
-const Avatar = styled(OriginAvatar)`
+const StyledAvatar = styled(Avatar)`
     display: inline-block !important;
     vertical-align: middle;
     background-color: #ffffff !important;
@@ -12,5 +12,5 @@ const Avatar = styled(OriginAvatar)`
 `;
 
 export const AvatarImage = ({ size, alt, src }) => {
-    return <Avatar size={size} alt={alt} src={src} />;
+    return <StyledAvatar size={size} alt={alt} src={src} />;
 };

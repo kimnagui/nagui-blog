@@ -1,9 +1,9 @@
 ---
+main_category: "gg"
+tags: ["animals", "Chicago", "zoos"]
 title: New Beginnings
 date: "2015-05-28T22:40:32.169Z"
-category: "gg"
-tags: ["animals", "Chicago", "zoos"]
-description: This is a custom description for SEO and Open Graph purposes, rather than the default generated excerpt. Simply add a description field to the frontmatter.
+thumbnail: "https://cdn-images-1.medium.com/max/1600/1*C1p_fIw4DnV1ULIw6YHxtQ.png"
 ---
 
 Far far away, behind the word mountains, far from the countries Vokalia and
@@ -18,10 +18,10 @@ Commas, wild Question Marks and devious Semikoli, but the Little Blind Text
 didn’t listen. She packed her seven versalia, put her initial into the belt and
 made herself on the way.
 
-- This however showed weasel
-- Well uncritical so misled
-  - this is very interesting
-- Goodness much until that fluid owl
+-   This however showed weasel
+-   Well uncritical so misled
+    -   this is very interesting
+-   Goodness much until that fluid owl
 
 When she reached the first hills of the **Italic Mountains**, she had a last
 view back on the skyline of her hometown _Bookmarksgrove_, the headline of
