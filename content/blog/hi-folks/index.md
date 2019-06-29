@@ -1,9 +1,12 @@
 ---
-main_category: "gg"
-tags: ["animals", "Chicago", "zoos"]
 title: New Beginnings
 date: "2015-05-28T22:40:32.169Z"
-thumbnail: "https://cdn-images-1.medium.com/max/1600/1*C1p_fIw4DnV1ULIw6YHxtQ.png"
+
+category: trip
+tags:
+    - animals
+    - Chicago
+    - zoos
 ---
 
 Far far away, behind the word mountains, far from the countries Vokalia and

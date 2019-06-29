@@ -1,9 +1,12 @@
 ---
-main_category: "gg"
-tags: ["animals", "Chicago", "zoos"]
 title: My Second Post!
 date: "2015-05-06T23:46:37.121Z"
-thumbnail: "https://cdn-images-1.medium.com/max/1600/1*C1p_fIw4DnV1ULIw6YHxtQ.png"
+
+category: life
+tags:
+    - animals
+    - Chicago
+    - zoos
 ---
 
 Wow! I love blogging so much already.

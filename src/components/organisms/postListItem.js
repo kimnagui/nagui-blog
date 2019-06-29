@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
+import Image from "gatsby-image";
 import { TextEllipsis } from "components/atoms/textEllipsis";
 
 const StyledLink = styled(Link)`
     display: flex;
     justify-content: space-between;
-    margin-bottom: ${props => (props.isImg ? "20px" : "40px")};
+    margin-bottom: ${props => (props.cover == "true" ? "20px" : "40px")};
     &:hover {
         text-decoration: none;
     }
@@ -19,7 +20,7 @@ const StyledH3 = styled.h3`
     color: #000;
 `;
 
-const StyledImg = styled.img`
+const StyledImg = styled(Image)`
     width: 120px;
     height: 120px;
     max-width: inherit;
@@ -27,13 +28,9 @@ const StyledImg = styled.img`
 `;
 
 export const PostListItem = ({ node, title }) => {
-    const isThumbnail = !!node.frontmatter.thumbnail;
+    const isCover = !!node.frontmatter.cover;
     return (
-        <StyledLink
-            key={node.fields.slug}
-            to={node.fields.slug}
-            isImg={isThumbnail}
-        >
+        <StyledLink to={node.fields.slug} cover={isCover.toString()}>
             <div style={{ paddingRight: "10px" }}>
                 <StyledH3>{title}</StyledH3>
 
@@ -41,9 +38,11 @@ export const PostListItem = ({ node, title }) => {
 
                 <small style={{ color: "#000" }}>{node.frontmatter.date}</small>
             </div>
-            {isThumbnail && (
+            {isCover && (
                 <div>
-                    <StyledImg src={node.frontmatter.thumbnail} />
+                    <StyledImg
+                        fluid={node.frontmatter.cover.childImageSharp.fluid}
+                    />
                 </div>
             )}
         </StyledLink>

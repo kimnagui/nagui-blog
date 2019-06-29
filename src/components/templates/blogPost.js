@@ -10,10 +10,15 @@ class BlogPost extends React.Component {
     render() {
         const post = this.props.data.markdownRemark;
         const siteTitle = this.props.data.site.siteMetadata.title;
+        const category = this.props.data.markdownRemark.frontmatter.category;
         const { previous, next } = this.props.pageContext;
 
         return (
-            <Layout location={this.props.location} title={siteTitle}>
+            <Layout
+                location={this.props.location}
+                title={siteTitle}
+                activeMenu={category}
+            >
                 <SEO
                     title={post.frontmatter.title}
                     description={post.excerpt}
@@ -83,8 +88,7 @@ export const pageQuery = graphql`
             frontmatter {
                 title
                 date(formatString: "MMMM DD, YYYY")
-                main_category
-                tags
+                category
             }
         }
     }

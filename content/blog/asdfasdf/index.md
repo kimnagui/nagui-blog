@@ -1,10 +1,13 @@
 ---
-main_category: "gg"
-sub_category: "11"
-tags: ["animals", "Chicago", "zoos"]
 title: 한글!
 date: "2015-05-06"
-# thumbnail: "https://cdn-images-1.medium.com/max/1600/1*C1p_fIw4DnV1ULIw6YHxtQ.png"
+
+category: study
+tags:
+    - example
+    - post
+
+cover: ./salty_egg.jpg
 ---
 
 와우! 블로그 시작한다.

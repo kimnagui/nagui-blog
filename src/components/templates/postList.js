@@ -6,7 +6,13 @@ export const PostList = ({ data }) => {
         <Fragment>
             {data.map(({ node }) => {
                 const title = node.frontmatter.title || node.fields.slug;
-                return <PostListItem node={node} title={title} />;
+                return (
+                    <PostListItem
+                        key={node.fields.slug}
+                        node={node}
+                        title={title}
+                    />
+                );
             })}
         </Fragment>
     );

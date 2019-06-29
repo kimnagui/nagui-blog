@@ -9,9 +9,9 @@ module.exports = {
         description: siteConfig.description,
         copyright: siteConfig.copyright,
         disqusShortname: siteConfig.disqusShortname,
-        menu: siteConfig.menu,
         author: siteConfig.author,
-        social: siteConfig.social
+        social: siteConfig.social,
+        category: siteConfig.category
     },
     plugins: [
         `gatsby-transformer-sharp`,
@@ -52,7 +52,6 @@ module.exports = {
                 ]
             }
         },
-        // `gatsby-plugin-root-import`,
         {
             resolve: "gatsby-plugin-root-import",
             options: {
@@ -88,6 +87,18 @@ module.exports = {
             resolve: `gatsby-plugin-typography`,
             options: {
                 pathToConfigModule: `src/utils/typography`
+            }
+        },
+        {
+            resolve: "gatsby-plugin-categories",
+            options: {
+                templatePath: `${__dirname}/src/components/templates/categoryList.js`
+            }
+        },
+        {
+            resolve: "gatsby-plugin-tags",
+            options: {
+                templatePath: `${__dirname}/src/components/templates/tagList.js`
             }
         }
     ]

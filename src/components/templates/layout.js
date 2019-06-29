@@ -4,7 +4,6 @@ import { SideHeader } from "components/organisms/sideHeader";
 import { SideContent } from "components/organisms/sideContent";
 import { MainHeader } from "components/organisms/mainHeader";
 import { MainContent } from "components/organisms/mainContent";
-// import { Link } from "gatsby";
 
 import myPhoto from "content/assets/profile-pic.png";
 
@@ -65,11 +64,31 @@ const MainOverlay = styled.div`
     }
 `;
 
+// const Category = styled.div`
+//     max-height: ${props =>
+//         props.id == props.open.name ? props.open.height + "px" : 0};
+//     overflow: hidden;
+//     transition: max-height 0.2s ease-out;
+//     background-color: #49c39e;
+//     color: black;
+// `;
+
+const Group = styled.div`
+    &:hover {
+        background-color: #49c39e;
+        color: black !important;
+    }
+`;
+
 export default class Layout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            mobile_side: false
+            mobile_side: false,
+            category_open: {
+                name: "",
+                height: 0
+            }
         };
     }
 
@@ -95,10 +114,22 @@ export default class Layout extends React.Component {
 
     profileClick = e => {};
 
-    render() {
-        const { children } = this.props;
-        const { mobile_side } = this.state;
+    // groupClick = (e, name) => {
+    //     const el = document.getElementById(name);
+    //     console.log(el);
+    //     const height = el.clientHeight != 0 ? 0 : el.scrollHeight;
 
+    //     this.setState({
+    //         category_open: {
+    //             name: name,
+    //             height: height
+    //         }
+    //     });
+    // };
+
+    render() {
+        const { children, activeMenu } = this.props;
+        const { mobile_side, category_open } = this.state;
         return (
             <Fragment>
                 <GlobalStyle />
@@ -108,13 +139,57 @@ export default class Layout extends React.Component {
                         nameText={"KimNagui"}
                         // profileClick={this.profileClick}
                     />
-                    <SideContent>
-                        {/* 카테고리 데이터 가져오기 */}
-                        <ul>
-                            <li>메인카테고리</li>
-                            <li>서브카테고리</li>
-                        </ul>
-                    </SideContent>
+                    <SideContent activeMenu={activeMenu} />
+                    {/* <SideContent>
+                        <Group
+                            style={{ cursor: "pointer" }}
+                            onClick={e => this.groupClick(e, "life")}
+                        >
+                            <SentimentSatisfiedOutlinedIcon
+                                style={{
+                                    margin: "10px 10px 10px 30px",
+                                    verticalAlign: "middle"
+                                }}
+                            />
+                            <span style={{ verticalAlign: "middle" }}>
+                                {"일상"}
+                            </span>
+                        </Group>
+                        <Category id="life" open={category_open}>
+                            <ul>
+                                <li>
+                                    <div>{"# 전체"}</div>
+                                </li>
+                                <li>
+                                    <div>2</div>
+                                </li>
+                            </ul>
+                        </Category>
+                        <Group
+                            style={{ cursor: "pointer" }}
+                            onClick={e => this.groupClick(e, "it")}
+                        >
+                            <ImportContactsOutlinedIcon
+                                style={{
+                                    margin: "10px 10px 10px 30px",
+                                    verticalAlign: "middle"
+                                }}
+                            />
+                            <span style={{ verticalAlign: "middle" }}>
+                                {"IT"}
+                            </span>
+                        </Group>
+                        <Category id="it" open={category_open}>
+                            <ul>
+                                <li>
+                                    <div>1</div>
+                                </li>
+                                <li>
+                                    <div>2</div>
+                                </li>
+                            </ul>
+                        </Category>
+                    </SideContent> */}
                 </SideBar>
                 <Main>
                     {mobile_side && <MainOverlay onClick={this.sideToggle} />}
