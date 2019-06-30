@@ -7,7 +7,7 @@ import { TextEllipsis } from "components/atoms/textEllipsis";
 const StyledLink = styled(Link)`
     display: flex;
     justify-content: space-between;
-    margin-bottom: ${props => (props.cover == "true" ? "20px" : "40px")};
+    margin-bottom: ${props => (props.cover == "true" ? "20px" : "33px")};
     &:hover {
         text-decoration: none;
     }
