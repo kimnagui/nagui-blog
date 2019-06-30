@@ -2,17 +2,13 @@
 
 module.exports = {
     url: "https://lumen.netlify.com",
-    title: "Nagui Blog",
-    description: "Tech Information",
-    social: {
-        email: "calrosban@gmail.com",
-        github: "kimnagui"
-    },
-    copyright: "© All rights reserved.",
-    disqusShortname: "KIMNAGUI",
-    postsPerPage: 4,
-    googleAnalyticsId: "UA-73379983-2",
+
+    title: "KimNagui's Blog",
+    description: "KimNagui's Blog",
+
     author: "KimNagui",
+    photo: "/profile-pic.png",
+
     category: [
         {
             id: "life",
@@ -29,5 +25,18 @@ module.exports = {
             name: "공부",
             icon: "import_contacts"
         }
-    ]
+    ],
+
+    social: {
+        email: "calrosban@gmail.com",
+        github: "kimnagui"
+    },
+
+    postsPerPage: 4,
+
+    copyright: "© All rights reserved.",
+    disqusShortname: "KIMNAGUI",
+    googleAnalyticsId: "UA-73379983-2"
 };
+
+// Material Icon : https://material.io/tools/icons/?style=baseline

@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { StaticQuery, graphql, Link } from "gatsby";
 import { Helmet } from "react-helmet";
 
-import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
-
 const StyledSideContent = styled.nav`
     -ms-overflow-style: none;
     ::-webkit-scrollbar {
@@ -32,10 +30,8 @@ const StyledSideContent = styled.nav`
 
 const Category = styled(Link)`
     display: block;
-    color: white;
-
+    color: ${props => (props.active === props.name ? "black" : "white")};
     background-color: ${props => props.active === props.name && "#49c39e"};
-    color: ${props => props.active === props.name && "black"};
 
     &:hover {
         text-decoration: none;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 
 import Layout from "components/templates/layout";
 import { PostList } from "components/templates/postList";
@@ -7,17 +7,17 @@ import SEO from "components/seo";
 
 class BlogIndex extends React.Component {
     render() {
-        const { data } = this.props;
+        const { data, location, pageContext } = this.props;
         const siteTitle = data.site.siteMetadata.title;
         const posts = data.allMarkdownRemark.edges;
 
         return (
-            <Layout location={this.props.location} title={siteTitle}>
+            <Layout location={location} title={siteTitle}>
                 <SEO
                     title="Main"
                     keywords={[`blog`, `gatsby`, `javascript`, `react`]}
                 />
-                <PostList data={posts} />
+                <PostList data={posts} page={pageContext} path={"/"} />
             </Layout>
         );
     }
@@ -26,13 +26,17 @@ class BlogIndex extends React.Component {
 export default BlogIndex;
 
 export const pageQuery = graphql`
-    query {
+    query($skip: Int!, $limit: Int!) {
         site {
             siteMetadata {
                 title
             }
         }
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+        allMarkdownRemark(
+            sort: { fields: [frontmatter___date], order: DESC }
+            skip: $skip
+            limit: $limit
+        ) {
             edges {
                 node {
                     excerpt(pruneLength: 300)

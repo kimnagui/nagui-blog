@@ -10,6 +10,7 @@ module.exports = {
         copyright: siteConfig.copyright,
         disqusShortname: siteConfig.disqusShortname,
         author: siteConfig.author,
+        photo: siteConfig.photo,
         social: siteConfig.social,
         category: siteConfig.category
     },
