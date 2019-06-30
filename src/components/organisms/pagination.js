@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { PageButton } from "../molecules/pageButton";
+import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 
 const StyledPagination = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    margin-top: 40px;
 `;
 
 export const Pagination = ({ page, path }) => {
@@ -35,23 +39,33 @@ export const Pagination = ({ page, path }) => {
 
         if (i === activePage) {
             pgs.push(
-                <PageButton link={`${path}${pageNum}`} active={true}>
+                <PageButton key={i} link={`${path}${pageNum}`} active={true}>
                     {i}
                 </PageButton>
             );
         } else {
-            pgs.push(<PageButton link={`${path}${pageNum}`}>{i}</PageButton>);
+            pgs.push(
+                <PageButton key={i} link={`${path}${pageNum}`}>
+                    {i}
+                </PageButton>
+            );
         }
     }
 
     return (
         <StyledPagination>
             {prevList && (
-                <PageButton link={`${path}/${prevList}`}>이전</PageButton>
+                <PageButton link={`${path}/${prevList}`}>
+                    <ArrowLeftIcon />
+                    <span>Prev</span>
+                </PageButton>
             )}
             {pgs.length > 0 && pgs}
             {nextList && (
-                <PageButton link={`${path}/${nextList}`}>다음</PageButton>
+                <PageButton link={`${path}/${nextList}`}>
+                    <span>Next</span>
+                    <ArrowRightIcon />
+                </PageButton>
             )}
         </StyledPagination>
     );
