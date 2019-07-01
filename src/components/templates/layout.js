@@ -11,7 +11,9 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
     html, body {
-        height: 100%
+        height: 100%;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
     }
     #___gatsby {
         height: 100%;
