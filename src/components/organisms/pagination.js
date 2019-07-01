@@ -1,5 +1,4 @@
 import React from "react";
-import siteConfig from "../../../config";
 import styled from "styled-components";
 import { PageButton } from "../molecules/pageButton";
 import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
@@ -33,7 +32,7 @@ export const Pagination = ({ page, path, listSize }) => {
     let pgs = [];
 
     for (let i = startPage; i <= endPage; i++) {
-        let pageNum = i != 1 ? `/${i}` : "";
+        let pageNum = i !== 1 ? `/${i}` : "";
 
         if (i === activePage) {
             pgs.push(

@@ -1,12 +1,11 @@
-"use strict";
-
 module.exports = {
-    url: "https://lumen.netlify.com",
+    url: "http://nagui.me",
 
-    title: "KimNagui's Blog",
+    title: "Nagui.me",
     description: "KimNagui's Blog",
 
-    author: "KimNagui",
+    authorNickName: "KimNagui",
+    authorFullName: "KimGwangHyeon",
     photo: "/profile-pic.png",
 
     category: [
