@@ -4,7 +4,7 @@ const siteConfig = require("./config.js");
 
 module.exports = {
     siteMetadata: {
-        url: siteConfig.url,
+        siteUrl: siteConfig.url,
         title: siteConfig.title,
         description: siteConfig.description,
         copyright: siteConfig.copyright,
