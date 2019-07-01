@@ -1,9 +1,7 @@
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const { paginate } = require(`gatsby-awesome-pagination`);
-
-// const createPaginatedPages = require("gatsby-paginate");
-// const siteConfig = require("./config.js");
+const siteConfig = require("./config.js");
 
 exports.createPages = ({ graphql, actions }) => {
     const { createPage } = actions;
@@ -65,11 +63,47 @@ exports.createPages = ({ graphql, actions }) => {
         });
 
         paginate({
-            createPage, // The Gatsby `createPage` function
-            items: posts, // An array of objects
-            itemsPerPage: 4, // How many items you want per page
-            pathPrefix: "/", // Creates pages like `/blog`, `/blog/2`, etc
-            component: path.resolve("./src/components/templates/index.js") // Just like `createPage()`
+            createPage,
+            items: posts,
+            itemsPerPage: siteConfig.postsPerPage,
+            pathPrefix: "/",
+            component: path.resolve("./src/components/templates/index.js")
+        });
+
+        category.forEach(cat => {
+            const catEdges = posts.filter(({ node }) =>
+                node.frontmatter.category.includes(cat)
+            );
+            paginate({
+                createPage,
+                items: catEdges,
+                itemsPerPage: siteConfig.postsPerPage,
+                pathPrefix: `/category/${cat}`,
+                component: path.resolve(
+                    "./src/components/templates/categoryList.js"
+                ),
+                context: {
+                    category: `${cat}`
+                }
+            });
+        });
+
+        tags.forEach(tag => {
+            const tagEdges = posts.filter(({ node }) =>
+                node.frontmatter.tags.includes(tag)
+            );
+            paginate({
+                createPage,
+                items: tagEdges,
+                itemsPerPage: siteConfig.postsPerPage,
+                pathPrefix: `/tags/${tag}`,
+                component: path.resolve(
+                    "./src/components/templates/tagList.js"
+                ),
+                context: {
+                    tag: `${tag}`
+                }
+            });
         });
 
         return null;

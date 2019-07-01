@@ -12,7 +12,8 @@ module.exports = {
         author: siteConfig.author,
         photo: siteConfig.photo,
         social: siteConfig.social,
-        category: siteConfig.category
+        category: siteConfig.category,
+        pageListSize: siteConfig.pageListSize
     },
     plugins: [
         `gatsby-transformer-sharp`,
@@ -66,7 +67,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
-                //trackingId: `ADD YOUR TRACKING ID HERE`,
+                trackingId: siteConfig.googleAnalyticsId
             }
         },
         `gatsby-plugin-feed`,
@@ -88,18 +89,6 @@ module.exports = {
             resolve: `gatsby-plugin-typography`,
             options: {
                 pathToConfigModule: `src/utils/typography`
-            }
-        },
-        {
-            resolve: "gatsby-plugin-categories",
-            options: {
-                templatePath: `${__dirname}/src/components/templates/categoryList.js`
-            }
-        },
-        {
-            resolve: "gatsby-plugin-tags",
-            options: {
-                templatePath: `${__dirname}/src/components/templates/tagList.js`
             }
         }
     ]

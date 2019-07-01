@@ -1,4 +1,5 @@
 import React from "react";
+import siteConfig from "../../../config";
 import styled from "styled-components";
 import { PageButton } from "../molecules/pageButton";
 import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
@@ -12,25 +13,22 @@ const StyledPagination = styled.div`
     margin-top: 40px;
 `;
 
-export const Pagination = ({ page, path }) => {
+export const Pagination = ({ page, path, listSize }) => {
     const totalPage = page.numberOfPages;
     const activePage = page.humanPageNumber;
 
-    const pageListSize = 5;
-
-    const startPage =
-        parseInt((activePage - 1) / pageListSize) * pageListSize + 1;
+    const startPage = parseInt((activePage - 1) / listSize) * listSize + 1;
     const endPage =
-        startPage + pageListSize - 1 < totalPage
-            ? startPage + pageListSize - 1
+        startPage + listSize - 1 < totalPage
+            ? startPage + listSize - 1
             : totalPage;
 
-    const totalList = Math.ceil(totalPage / pageListSize);
-    const currentList = parseInt((activePage - 1) / pageListSize) + 1;
+    const totalList = Math.ceil(totalPage / listSize);
+    const currentList = parseInt((activePage - 1) / listSize) + 1;
 
-    const prevList = currentList <= 1 ? null : (currentList - 1) * pageListSize;
+    const prevList = currentList <= 1 ? null : (currentList - 1) * listSize;
     const nextList =
-        currentList < totalList ? currentList * pageListSize + 1 : null;
+        currentList < totalList ? currentList * listSize + 1 : null;
 
     let pgs = [];
 

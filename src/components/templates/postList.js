@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { PostListItem } from "components/organisms/postListItem";
 import { Pagination } from "components/organisms/pagination";
 
-export const PostList = ({ data, page, path }) => {
+export const PostList = ({ data, page, path, pageListSize }) => {
     return (
         <Fragment>
             {data.map(({ node }) => {
@@ -15,7 +15,9 @@ export const PostList = ({ data, page, path }) => {
                     />
                 );
             })}
-            {page && <Pagination page={page} path={path} />}
+            {page && (
+                <Pagination page={page} path={path} listSize={pageListSize} />
+            )}
         </Fragment>
     );
 };

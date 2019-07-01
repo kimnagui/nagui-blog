@@ -1,40 +1,65 @@
 import React from "react";
 import { graphql } from "gatsby";
-
 import Layout from "./layout";
 import SEO from "../seo";
+import { PostList } from "components/templates/postList";
 
-const CategoryTemplate = ({ location, pageContext, data }) => {
-    const { tag } = pageContext;
+const TagsTemplate = ({ location, pageContext, data }) => {
+    const tag = pageContext.tag;
+    const category = "";
+
     return (
-        <Layout location={location} title={`Posts in tag "${tag}"`}>
-            <div className="tag-container">
-                <SEO title={`Posts in tag "${tag}"`} />
-                <h1>Tag: {tag}</h1>
-                {/* <PostsList postEdges={data.allMarkdownRemark.edges} /> */}
+        <Layout
+            location={location}
+            title={`"${tag}" 관련 글 목록`}
+            activeMenu={category}
+        >
+            <div>
+                <SEO title={`"${tag}" 관련 글 목록`} />
+
+                <PostList
+                    data={data.allMarkdownRemark.edges}
+                    page={pageContext}
+                    path={`/tags/${tag}`}
+                    pageListSize={data.site.siteMetadata.pageListSize}
+                />
             </div>
         </Layout>
     );
 };
 
 export const pageQuery = graphql`
-    query TagPage($tag: String) {
+    query($skip: Int!, $limit: Int!, $tag: String) {
+        site {
+            siteMetadata {
+                pageListSize
+            }
+        }
         allMarkdownRemark(
-            limit: 1000
-            filter: { fields: { tags: { in: [$tag] } } }
+            sort: { fields: [frontmatter___date], order: DESC }
+            filter: { frontmatter: { tags: { in: [$tag] } } }
+            skip: $skip
+            limit: $limit
         ) {
             totalCount
             edges {
                 node {
                     fields {
                         slug
-                        tags
                     }
-                    excerpt
-                    timeToRead
+                    excerpt(pruneLength: 300)
                     frontmatter {
                         title
-                        date
+                        date(formatString: "MMMM DD, YYYY")
+                        category
+                        tags
+                        cover {
+                            childImageSharp {
+                                fluid(maxWidth: 600) {
+                                    ...GatsbyImageSharpFluid
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -42,4 +67,4 @@ export const pageQuery = graphql`
     }
 `;
 
-export default CategoryTemplate;
+export default TagsTemplate;

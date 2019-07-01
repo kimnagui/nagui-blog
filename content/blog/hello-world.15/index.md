@@ -6,6 +6,7 @@ category: study
 tags:
     - example
     - post
+    - zoos
 
 cover: ./salty_egg.jpg
 ---

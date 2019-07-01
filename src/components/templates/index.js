@@ -8,16 +8,21 @@ import SEO from "components/seo";
 class BlogIndex extends React.Component {
     render() {
         const { data, location, pageContext } = this.props;
-        const siteTitle = data.site.siteMetadata.title;
+        const { title, pageListSize } = data.site.siteMetadata;
         const posts = data.allMarkdownRemark.edges;
 
         return (
-            <Layout location={location} title={siteTitle}>
+            <Layout location={location} title={title}>
                 <SEO
                     title="Main"
                     keywords={[`blog`, `gatsby`, `javascript`, `react`]}
                 />
-                <PostList data={posts} page={pageContext} path={"/"} />
+                <PostList
+                    data={posts}
+                    page={pageContext}
+                    path={"/"}
+                    pageListSize={pageListSize}
+                />
             </Layout>
         );
     }
@@ -30,6 +35,7 @@ export const pageQuery = graphql`
         site {
             siteMetadata {
                 title
+                pageListSize
             }
         }
         allMarkdownRemark(

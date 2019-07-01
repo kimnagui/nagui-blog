@@ -33,6 +33,7 @@ module.exports = {
     },
 
     postsPerPage: 4,
+    pageListSize: 5,
 
     copyright: "© All rights reserved.",
     disqusShortname: "KIMNAGUI",

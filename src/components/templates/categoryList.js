@@ -1,18 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 import { graphql } from "gatsby";
 import Layout from "./layout";
 import SEO from "../seo";
 import { PostList } from "components/templates/postList";
 
-const StyledH1 = styled.h1`
-    margin-top: 0;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid hsla(0, 0%, 0%, 0.07);
-`;
-
 const CategoryList = ({ location, pageContext, data }) => {
-    const { category } = pageContext;
+    const category = pageContext.category;
+
     return (
         <Layout
             location={location}
@@ -20,34 +14,44 @@ const CategoryList = ({ location, pageContext, data }) => {
             activeMenu={category}
         >
             <div>
-                <SEO title={`${category}`} />
+                <SEO title={`"${category}" 관련 글 목록`} />
 
-                {/* <StyledH1>"{category}" 관련 글 목록</StyledH1> */}
-                <PostList data={data.allMarkdownRemark.edges} />
+                <PostList
+                    data={data.allMarkdownRemark.edges}
+                    page={pageContext}
+                    path={`/category/${category}`}
+                    pageListSize={data.site.siteMetadata.pageListSize}
+                />
             </div>
         </Layout>
     );
 };
 
 export const pageQuery = graphql`
-    query CategoryPage($category: String) {
+    query($skip: Int!, $limit: Int!, $category: String) {
+        site {
+            siteMetadata {
+                pageListSize
+            }
+        }
         allMarkdownRemark(
             sort: { fields: [frontmatter___date], order: DESC }
-            limit: 1000
-            filter: { fields: { category: { eq: $category } } }
+            filter: { frontmatter: { category: { eq: $category } } }
+            skip: $skip
+            limit: $limit
         ) {
             totalCount
             edges {
                 node {
                     fields {
                         slug
-                        category
                     }
                     excerpt(pruneLength: 300)
                     frontmatter {
                         title
                         date(formatString: "MMMM DD, YYYY")
                         category
+                        tags
                         cover {
                             childImageSharp {
                                 fluid(maxWidth: 600) {
