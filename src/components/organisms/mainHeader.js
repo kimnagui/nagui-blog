@@ -21,7 +21,7 @@ const MenuButton = styled.div`
     }
 `;
 
-export const MainHeader = ({ sideToggle }) => {
+const MainHeader = ({ sideToggle }) => {
     return (
         <StyledMainHeader>
             <MenuButton>
@@ -34,3 +34,5 @@ export const MainHeader = ({ sideToggle }) => {
         </StyledMainHeader>
     );
 };
+
+export default MainHeader;

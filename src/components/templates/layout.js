@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { SideHeader } from "components/organisms/sideHeader";
-import { SideContent } from "components/organisms/sideContent";
-import { MainHeader } from "components/organisms/mainHeader";
-import { MainContent } from "components/organisms/mainContent";
+import SideHeader from "components/organisms/sideHeader";
+import SideContent from "components/organisms/sideContent";
+import MainHeader from "components/organisms/mainHeader";
+import MainContent from "components/organisms/mainContent";
 
 const GlobalStyle = createGlobalStyle`
     * {

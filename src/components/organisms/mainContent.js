@@ -10,6 +10,8 @@ const StyledMainContent = styled.section`
     }
 `;
 
-export const MainContent = ({ children }) => {
+const MainContent = ({ children }) => {
     return <StyledMainContent>{children}</StyledMainContent>;
 };
+
+export default MainContent;

@@ -1,19 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Circle } from "../atoms/circle";
-import { AvatarName } from "../atoms/avatarName";
+import Bio from "./bio";
 import ClickPopup from "../atoms/clickPopup";
 import { StaticQuery, graphql, Link } from "gatsby";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-
-const StyledLink = styled(Link)`
-    display: block;
-    color: white;
-
-    &:hover {
-        text-decoration: none;
-    }
-`;
 
 const StyledDiv = styled.div`
     position: relative;
@@ -25,9 +16,9 @@ const StyledSideHeader = styled.header`
     font-size: 13px;
 `;
 
-const StyledSpan = styled.span`
+const Author = styled.span`
     vertical-align: middle;
-    color: gray;
+    color: ${props => (props.changeColor ? "#fff" : "gray")};
 
     svg {
         vertical-align: bottom;
@@ -39,35 +30,34 @@ const StyledSpan = styled.span`
     }
 `;
 
-export const SideHeader = () => {
+const BlogTitle = styled(Link)`
+    display: block;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-left: 10px;
+    font-size: 30px;
+
+    &:hover {
+        text-decoration: none;
+    }
+`;
+
+const SideHeader = () => {
     const [bioOpen, setBioOpen] = useState(false);
     return (
         <StaticQuery
-            query={graphql`
-                query {
-                    site {
-                        siteMetadata {
-                            title
-                            authorFullName
-                        }
-                    }
-                }
-            `}
+            query={query}
             render={data => {
                 const node = data.site.siteMetadata;
-
                 return (
                     <StyledSideHeader>
-                        <StyledLink to={"/"}>
-                            {/* <AvatarImage size="50px" src={node.photo} /> */}
-                            <AvatarName
-                                ml="10px"
-                                size="30px"
-                                text={node.title}
-                            />
-                        </StyledLink>
+                        <BlogTitle to={"/"}>{node.title}</BlogTitle>
                         <StyledDiv>
-                            <StyledSpan onClick={() => setBioOpen(true)}>
+                            <Author
+                                onClick={() => setBioOpen(true)}
+                                changeColor={bioOpen}
+                            >
                                 <Circle
                                     display={"inline-block"}
                                     size={"13"}
@@ -75,22 +65,12 @@ export const SideHeader = () => {
                                 />
                                 {node.authorFullName}
                                 <KeyboardArrowDownIcon />
-                            </StyledSpan>
+                            </Author>
                             <ClickPopup
                                 open={bioOpen}
                                 close={() => setBioOpen(false)}
                             >
-                                <div>
-                                    <div>
-                                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-                                    </div>
-                                    <div>asdfasdfasdf</div>
-                                    <div>asdfasdfasdf</div>
-                                    <div>asdfasdfasdf</div>
-                                    <div>asdfasdfasdf</div>
-                                    <div>asdfasdfasdf</div>
-                                    <div>asdfasdfasdf</div>
-                                </div>
+                                <Bio />
                             </ClickPopup>
                         </StyledDiv>
                     </StyledSideHeader>
@@ -99,3 +79,16 @@ export const SideHeader = () => {
         />
     );
 };
+
+const query = graphql`
+    query {
+        site {
+            siteMetadata {
+                title
+                authorFullName
+            }
+        }
+    }
+`;
+
+export default SideHeader;

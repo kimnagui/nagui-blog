@@ -49,22 +49,9 @@ const Category = styled(Link)`
     }
 `;
 
-export const SideContent = ({ activeMenu }) => (
+const SideContent = ({ activeMenu }) => (
     <StaticQuery
-        query={graphql`
-            query {
-                site {
-                    siteMetadata {
-                        title
-                        category {
-                            id
-                            name
-                            icon
-                        }
-                    }
-                }
-            }
-        `}
+        query={query}
         render={data => {
             const category = data.site.siteMetadata.category;
             return (
@@ -93,3 +80,20 @@ export const SideContent = ({ activeMenu }) => (
         }}
     />
 );
+
+const query = graphql`
+    query {
+        site {
+            siteMetadata {
+                title
+                category {
+                    id
+                    name
+                    icon
+                }
+            }
+        }
+    }
+`;
+
+export default SideContent;
