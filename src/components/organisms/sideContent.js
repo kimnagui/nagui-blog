@@ -40,7 +40,7 @@ const Category = styled(Link)`
     }
 
     i {
-        margin: 10px 10px 10px 30px;
+        margin: 10px 20px 10px 30px;
         vertical-align: middle;
     }
 
@@ -71,8 +71,8 @@ export const SideContent = ({ activeMenu }) => (
                 <StyledSideContent>
                     <Helmet>
                         <link
-                            href="https://fonts.googleapis.com/icon?family=Material+Icons"
                             rel="stylesheet"
+                            href="https://use.fontawesome.com/releases/v5.4.0/css/all.css"
                         />
                     </Helmet>
                     {category.map(node => {
@@ -83,7 +83,7 @@ export const SideContent = ({ activeMenu }) => (
                                 to={`/category/${node.id}`}
                                 active={activeMenu}
                             >
-                                <i className="material-icons">{node.icon}</i>
+                                <i className={`fas ${node.icon} fa-fw`} />
                                 <span>{node.name}</span>
                             </Category>
                         );
