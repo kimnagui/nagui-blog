@@ -6,6 +6,7 @@ module.exports = {
 
     authorNickName: "KimNagui",
     authorFullName: "KimGwangHyeon",
+    authorDescription: "",
     photo: "/profile-pic.png",
 
     category: [

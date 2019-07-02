@@ -11,6 +11,7 @@ module.exports = {
         disqusShortname: siteConfig.disqusShortname,
         authorNickName: siteConfig.authorNickName,
         authorFullName: siteConfig.authorFullName,
+        authorDescription: siteConfig.authorDescription,
         photo: siteConfig.photo,
         social: siteConfig.social,
         category: siteConfig.category,
