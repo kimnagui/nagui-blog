@@ -8,16 +8,21 @@ const StyledLink = styled(Link)`
     display: flex;
     justify-content: space-between;
     margin-bottom: ${props => (props.cover === "true" ? "20px" : "33px")};
+
     &:hover {
         text-decoration: none;
     }
-`;
 
-const StyledH3 = styled.h3`
-    margin: 0;
-    margin-bottom: 5px;
-    flex: 1 1 auto;
-    color: #000;
+    h3 {
+        margin: 0;
+        margin-bottom: 5px;
+        flex: 1 1 auto;
+        color: #000;
+    }
+
+    div:first-child {
+        padding-right: 10px;
+    }
 `;
 
 const StyledImg = styled(Image)`
@@ -31,8 +36,8 @@ export const PostListItem = ({ node, title }) => {
     const isCover = !!node.frontmatter.cover;
     return (
         <StyledLink to={node.fields.slug} cover={isCover.toString()}>
-            <div style={{ paddingRight: "10px" }}>
-                <StyledH3>{title}</StyledH3>
+            <div>
+                <h3>{title}</h3>
 
                 <TextEllipsis line={2} color={"gray"} text={node.excerpt} />
 
@@ -41,7 +46,7 @@ export const PostListItem = ({ node, title }) => {
             {isCover && (
                 <div>
                     <StyledImg
-                        fluid={node.frontmatter.cover.childImageSharp.fluid}
+                        fixed={node.frontmatter.cover.childImageSharp.fixed}
                     />
                 </div>
             )}
