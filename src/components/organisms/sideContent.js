@@ -57,12 +57,12 @@ const SideContent = ({ activeMenu }) => (
             return (
                 <StyledSideContent>
                     {category.map(node => {
-                        const isActive = activeMenu === node.id ? 1 : 0;
+                        const isActive = activeMenu === node.id;
                         return (
                             <Category
                                 key={node.id}
                                 to={`/category/${node.id}`}
-                                active={isActive}
+                                active={isActive ? 1 : 0}
                             >
                                 <i className={`fas ${node.icon} fa-fw`} />
                                 <span>{node.id}</span>

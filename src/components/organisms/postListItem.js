@@ -33,9 +33,10 @@ const StyledImg = styled(Image)`
 `;
 
 export const PostListItem = ({ node, title }) => {
-    const isCover = !!node.frontmatter.cover ? 1 : 0;
+    const isCover = !!node.frontmatter.cover;
+    console.log(node);
     return (
-        <StyledLink to={node.fields.slug} cover={isCover}>
+        <StyledLink to={node.fields.slug} cover={isCover ? 1 : 0}>
             <div>
                 <h3>{title}</h3>
 
