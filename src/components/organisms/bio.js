@@ -6,6 +6,11 @@ import Image from "gatsby-image";
 const Container = styled.div`
     display: flex;
     flex-direction: column;
+
+    p {
+        color: #2b649e;
+        font-weight: bold;
+    }
 `;
 
 const BioNameAndPhoto = styled.div`
@@ -36,12 +41,6 @@ const BioNameAndPhoto = styled.div`
 const BioSocial = styled.div`
     width: 100%;
     display: flex;
-    flex-direction: column;
-
-    p {
-        color: #80d2de;
-        font-weight: bold;
-    }
 
     a {
         display: block;
@@ -78,28 +77,27 @@ const Bio = () => {
                                 <div>{authorFullName}</div>
                             </div>
                         </BioNameAndPhoto>
+                        <p>{authorDescription}</p>
                         <BioSocial>
-                            <p>{authorDescription}</p>
                             {social && (
                                 <Fragment>
-                                    <hr />
                                     {social.github && (
                                         <a href={social.github} target="_blank">
                                             <span className="fa-stack">
                                                 <i className="fas fa-circle fa-stack-2x" />
                                                 <i className="fab fa-github fa-stack-1x fa-inverse fa-lg" />
                                             </span>
-                                            {social.github}
                                         </a>
                                     )}
                                     {social.email && (
-                                        <div>
-                                            <span className="fa-stack">
-                                                <i className="fas fa-circle fa-stack-2x" />
-                                                <i className="fas fa-envelope fa-stack-1x fa-inverse" />
-                                            </span>
-                                            {social.email}
-                                        </div>
+                                        <a href={`mailto:${social.email}`}>
+                                            <div>
+                                                <span className="fa-stack">
+                                                    <i className="fas fa-circle fa-stack-2x" />
+                                                    <i className="fas fa-envelope fa-stack-1x fa-inverse" />
+                                                </span>
+                                            </div>
+                                        </a>
                                     )}
                                 </Fragment>
                             )}
