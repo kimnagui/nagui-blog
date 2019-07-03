@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { StaticQuery, graphql, Link } from "gatsby";
-import { Helmet } from "react-helmet";
 
 const StyledSideContent = styled.nav`
     -ms-overflow-style: none;
@@ -56,12 +55,6 @@ const SideContent = ({ activeMenu }) => (
             const category = data.site.siteMetadata.category;
             return (
                 <StyledSideContent>
-                    <Helmet>
-                        <link
-                            rel="stylesheet"
-                            href="https://use.fontawesome.com/releases/v5.4.0/css/all.css"
-                        />
-                    </Helmet>
                     {category.map(node => {
                         return (
                             <Category

@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import { Helmet } from "react-helmet";
 import SideHeader from "components/organisms/sideHeader";
 import SideContent from "components/organisms/sideContent";
 import MainHeader from "components/organisms/mainHeader";
@@ -100,6 +101,12 @@ export default class Layout extends React.Component {
         return (
             <Fragment>
                 <GlobalStyle />
+                <Helmet>
+                    <link
+                        rel="stylesheet"
+                        href="https://use.fontawesome.com/releases/v5.4.0/css/all.css"
+                    />
+                </Helmet>
                 <SideBar mobileOpen={mobile_side}>
                     <SideHeader />
                     <SideContent activeMenu={activeMenu} />
