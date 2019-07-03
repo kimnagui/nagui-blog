@@ -23,26 +23,31 @@ const StyledLink = styled(Link)`
     div:first-child {
         padding-right: 10px;
     }
+
+    small {
+        color: #000;
+    }
 `;
 
 const StyledImg = styled(Image)`
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     max-width: inherit;
     margin-bottom: 0px;
 `;
 
 export const PostListItem = ({ node, title }) => {
     const isCover = !!node.frontmatter.cover;
-    console.log(node);
     return (
         <StyledLink to={node.fields.slug} cover={isCover ? 1 : 0}>
             <div>
-                <h3>{title}</h3>
+                <h3>
+                    <TextEllipsis line={1} color={"black"} text={title} />
+                </h3>
 
                 <TextEllipsis line={2} color={"gray"} text={node.excerpt} />
 
-                <small style={{ color: "#000" }}>{node.frontmatter.date}</small>
+                <small>{node.frontmatter.date}</small>
             </div>
             {isCover && (
                 <div>
