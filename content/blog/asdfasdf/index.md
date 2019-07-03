@@ -2,7 +2,7 @@
 title: 한글!
 date: "2015-05-06"
 
-category: study
+category: 공부
 tags:
     - example
     - post

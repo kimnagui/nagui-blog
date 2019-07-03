@@ -12,18 +12,15 @@ module.exports = {
     // icon : FontAwesome
     category: [
         {
-            id: "life",
-            name: "일상",
+            id: "일상",
             icon: "fa-grin-alt"
         },
         {
-            id: "trip",
-            name: "여행",
+            id: "여행",
             icon: "fa-plane-departure"
         },
         {
-            id: "study",
-            name: "공부",
+            id: "공부",
             icon: "fa-book-open"
         }
     ],
