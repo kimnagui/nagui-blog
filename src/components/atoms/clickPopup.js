@@ -17,7 +17,7 @@ const StyledSpan = styled.div`
         content: "";
         position: absolute;
         bottom: 99%;
-        left: 50%;
+        left: 25%;
         margin-left: -5px;
         border-width: 7px;
         border-style: solid;

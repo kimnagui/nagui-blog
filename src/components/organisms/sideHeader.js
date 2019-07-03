@@ -8,7 +8,6 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const StyledDiv = styled.div`
     position: relative;
-    display: inline-block;
 `;
 
 const StyledSideHeader = styled.header`
@@ -63,7 +62,7 @@ const SideHeader = () => {
                                     size={"13"}
                                     color={"#49c39e"}
                                 />
-                                {node.authorFullName}
+                                {node.authorNickName}
                                 <KeyboardArrowDownIcon />
                             </Author>
                             <ClickPopup
@@ -85,7 +84,7 @@ const query = graphql`
         site {
             siteMetadata {
                 title
-                authorFullName
+                authorNickName
             }
         }
     }

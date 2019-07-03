@@ -6,9 +6,10 @@ module.exports = {
 
     authorNickName: "KimNagui",
     authorFullName: "KimGwangHyeon",
-    authorDescription: "",
+    authorDescription: "#프론트엔드개발자 #칠러",
     photo: "/profile-pic.png",
 
+    // icon : FontAwesome
     category: [
         {
             id: "life",
@@ -29,7 +30,7 @@ module.exports = {
 
     social: {
         email: "calrosban@gmail.com",
-        github: "kimnagui"
+        github: "https://github.com/kimnagui"
     },
 
     postsPerPage: 4,
