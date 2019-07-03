@@ -7,7 +7,7 @@ import { TextEllipsis } from "components/atoms/textEllipsis";
 const StyledLink = styled(Link)`
     display: flex;
     justify-content: space-between;
-    margin-bottom: ${props => (props.cover === "true" ? "20px" : "33px")};
+    margin-bottom: ${props => (props.cover ? "20px" : "33px")};
 
     &:hover {
         text-decoration: none;
@@ -33,9 +33,9 @@ const StyledImg = styled(Image)`
 `;
 
 export const PostListItem = ({ node, title }) => {
-    const isCover = !!node.frontmatter.cover;
+    const isCover = !!node.frontmatter.cover ? 1 : 0;
     return (
-        <StyledLink to={node.fields.slug} cover={isCover.toString()}>
+        <StyledLink to={node.fields.slug} cover={isCover}>
             <div>
                 <h3>{title}</h3>
 

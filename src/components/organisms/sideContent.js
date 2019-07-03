@@ -29,8 +29,9 @@ const StyledSideContent = styled.nav`
 
 const Category = styled(Link)`
     display: block;
-    color: ${props => (props.active === props.name ? "black" : "white")};
-    background-color: ${props => props.active === props.name && "#49c39e"};
+    color: ${props => (props.active ? "black" : "white")};
+    background-color: ${props => props.active && "#49c39e"};
+    text-transform: uppercase;
 
     &:hover {
         text-decoration: none;
@@ -56,15 +57,15 @@ const SideContent = ({ activeMenu }) => (
             return (
                 <StyledSideContent>
                     {category.map(node => {
+                        const isActive = activeMenu === node.id ? 1 : 0;
                         return (
                             <Category
                                 key={node.id}
-                                name={node.id}
                                 to={`/category/${node.id}`}
-                                active={activeMenu}
+                                active={isActive}
                             >
                                 <i className={`fas ${node.icon} fa-fw`} />
-                                <span>{node.name}</span>
+                                <span>{node.id}</span>
                             </Category>
                         );
                     })}
@@ -81,7 +82,6 @@ const query = graphql`
                 title
                 category {
                     id
-                    name
                     icon
                 }
             }
