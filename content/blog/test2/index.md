@@ -2,10 +2,9 @@
 title: Hello World
 date: "2015-05-01T22:12:03.284Z"
 
-category: 공부
+category: 일상
 tags:
-    - example
-    - post
+    - test2
 
 cover: ./salty_egg.jpg
 ---

@@ -4,8 +4,7 @@ date: "2015-05-01T22:12:03.284Z"
 
 category: 공부
 tags:
-    - example
-    - post
+    - test1
 
 cover: ./salty_egg.jpg
 ---

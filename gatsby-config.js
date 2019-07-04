@@ -8,7 +8,6 @@ module.exports = {
         title: siteConfig.title,
         description: siteConfig.description,
         copyright: siteConfig.copyright,
-        disqusShortname: siteConfig.disqusShortname,
         authorNickName: siteConfig.authorNickName,
         authorFullName: siteConfig.authorFullName,
         authorDescription: siteConfig.authorDescription,

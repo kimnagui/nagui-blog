@@ -7,7 +7,7 @@ module.exports = {
     authorNickName: "KimNagui",
     authorFullName: "KimGwangHyeon",
     authorDescription: "#프론트엔드개발자 #칠러",
-    photo: "/profile-pic.png",
+    photo: "content/assets/profile-pic.png",
 
     // icon : FontAwesome
     category: [
@@ -34,6 +34,5 @@ module.exports = {
     pageListSize: 5,
 
     copyright: "© All rights reserved.",
-    disqusShortname: "KIMNAGUI",
-    googleAnalyticsId: "UA-73379983-2"
+    googleAnalyticsId: "UA-143311992-1"
 };
