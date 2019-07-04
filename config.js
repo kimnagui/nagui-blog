@@ -30,7 +30,7 @@ module.exports = {
         github: "https://github.com/kimnagui"
     },
 
-    postsPerPage: 4,
+    postsPerPage: 5,
     pageListSize: 5,
 
     copyright: "© All rights reserved.",
