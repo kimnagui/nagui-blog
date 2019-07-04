@@ -24,11 +24,6 @@ const StyledButton = styled.div`
         color: gray;
     }
 
-    /* span {
-        font-size: 13px;
-        color: gray;
-    } */
-
     &:hover {
         color: #ebb424;
     }
