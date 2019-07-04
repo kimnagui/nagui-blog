@@ -12,17 +12,16 @@ const StyledLink = styled(Link)`
 
 const StyledButton = styled.div`
     display: inline-block;
-    color: #3f0f3f;
-    background-color: #fff;
+    vertical-align: middle;
+    padding: 5px 10px;
     border: 2px solid #3f0f3f;
     border-radius: 15px;
 
-    padding: 5px 10px;
+    color: #3f0f3f;
+    background-color: #fff;
 
     font-size: 15px;
     line-height: 15px;
-
-    vertical-align: middle;
 
     svg,
     span {

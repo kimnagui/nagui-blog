@@ -10,7 +10,9 @@ const TagList = ({ data }) => {
     return (
         <Container>
             {data.map(node => (
-                <TagButton link={`tags/${node}`}>#{node}</TagButton>
+                <TagButton key={node} link={`tags/${node}`}>
+                    #{node}
+                </TagButton>
             ))}
         </Container>
     );
