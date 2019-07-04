@@ -104,7 +104,7 @@ export default class Layout extends React.Component {
                 <Helmet>
                     <link
                         rel="stylesheet"
-                        href="https://use.fontawesome.com/releases/v5.4.0/css/all.css"
+                        href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
                     />
                 </Helmet>
                 <SideBar mobileOpen={mobile_side}>
