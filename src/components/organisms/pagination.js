@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { PageButton } from "../molecules/pageButton";
-import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 
 const StyledPagination = styled.div`
     display: flex;
@@ -53,15 +51,13 @@ export const Pagination = ({ page, path, listSize }) => {
         <StyledPagination>
             {prevList && (
                 <PageButton link={`${path}/${prevList}`}>
-                    <ArrowLeftIcon />
-                    <span>Prev</span>
+                    <i className="fas fa-chevron-left" />
                 </PageButton>
             )}
             {pgs.length > 0 && pgs}
             {nextList && (
                 <PageButton link={`${path}/${nextList}`}>
-                    <span>Next</span>
-                    <ArrowRightIcon />
+                    <i className="fas fa-chevron-right" />
                 </PageButton>
             )}
         </StyledPagination>

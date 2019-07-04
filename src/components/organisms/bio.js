@@ -82,7 +82,11 @@ const Bio = () => {
                             {social && (
                                 <Fragment>
                                     {social.github && (
-                                        <a href={social.github} target="_blank">
+                                        <a
+                                            href={social.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
                                             <span className="fa-stack">
                                                 <i className="fas fa-circle fa-stack-2x" />
                                                 <i className="fab fa-github fa-stack-1x fa-inverse fa-lg" />

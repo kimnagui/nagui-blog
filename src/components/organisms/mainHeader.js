@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { IconBtn } from "components/atoms/iconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 
 const StyledMainHeader = styled.header`
     width: 100%;
@@ -26,7 +25,7 @@ const MainHeader = ({ sideToggle }) => {
         <StyledMainHeader>
             <MenuButton>
                 <IconBtn
-                    icon={<MenuIcon />}
+                    icon={<i className="fas fa-bars" />}
                     color={"#ffffff"}
                     onClick={sideToggle}
                 />

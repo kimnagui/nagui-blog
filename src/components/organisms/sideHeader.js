@@ -4,7 +4,6 @@ import Circle from "../atoms/circle";
 import Bio from "./bio";
 import ClickPopup from "../atoms/clickPopup";
 import { StaticQuery, graphql, Link } from "gatsby";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const StyledDiv = styled.div`
     position: relative;
@@ -19,8 +18,8 @@ const Author = styled.span`
     vertical-align: middle;
     color: ${props => (props.changeColor ? "#fff" : "gray")};
 
-    svg {
-        vertical-align: bottom;
+    i {
+        padding-left: 5px;
     }
 
     &:hover {
@@ -63,7 +62,7 @@ const SideHeader = () => {
                                     color={"#49c39e"}
                                 />
                                 {node.authorNickName}
-                                <KeyboardArrowDownIcon />
+                                <i className="fas fa-chevron-down" />
                             </Author>
                             <ClickPopup
                                 open={bioOpen}

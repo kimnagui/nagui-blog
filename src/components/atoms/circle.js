@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledCircle = styled.div`
-    display: ${props => props.display || "block"}
+    display: ${props => props.display || "block"};
     width: ${props => props.size + "px"};
     height: ${props => props.size + "px"};
     border-radius: 50%;
