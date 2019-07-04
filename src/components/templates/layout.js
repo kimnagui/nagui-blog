@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
-import styled, { createGlobalStyle } from "styled-components";
-import { Helmet } from "react-helmet";
+import styled, { css, createGlobalStyle } from "styled-components";
 import SideHeader from "components/organisms/sideHeader";
 import SideContent from "components/organisms/sideContent";
 import MainHeader from "components/organisms/mainHeader";
@@ -12,26 +11,35 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
     html, body {
-        height: 100%;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-    }
-    #___gatsby {
-        height: 100%;
-    }
-    div[role='group'] {
-        display: flex;
-        height: 100%;
-        overflow: hidden;
+        overflow: auto;
+
+        ${props =>
+            props.mobileOpen &&
+            css`
+                overflow: hidden;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+            `}
+
+        div[role='group'] {
+            /* iphone의 elastic scrolling 시, 고정된 헤더가 가려지지 않도록 body 에 속해있던 속성을 하단 div로 가져옴 */
+            -webkit-overflow-scrolling: touch;
+        }
     }
 `;
 
 const SideBar = styled.div`
-    display: flex;
-    flex-direction: column;
+    min-width: 280px;
+    height: 100%;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+
     background-color: #3f0f3f;
     color: #ffffff;
-    min-width: 280px;
 
     transition: margin 0.5s;
     margin-left: ${props => (props.mobileOpen ? 0 : "-280px")};
@@ -43,10 +51,13 @@ const SideBar = styled.div`
 `;
 
 const Main = styled.div`
-    display: flex;
-    flex-direction: column;
+    margin-top: 50px;
+    margin-left: 0;
 
-    position: relative;
+    @media all and (min-width: 992px) {
+        margin-top: 0;
+        margin-left: 280px !important;
+    }
 `;
 
 const MainOverlay = styled.div`
@@ -58,7 +69,7 @@ const MainOverlay = styled.div`
     background-color: black;
     opacity: 0.8;
 
-    z-index: 99;
+    z-index: 2;
 
     @media all and (min-width: 992px) {
         display: none;
@@ -100,13 +111,7 @@ export default class Layout extends React.Component {
         const { mobile_side } = this.state;
         return (
             <Fragment>
-                <GlobalStyle />
-                <Helmet>
-                    <link
-                        rel="stylesheet"
-                        href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
-                    />
-                </Helmet>
+                <GlobalStyle mobileOpen={mobile_side} />
                 <SideBar mobileOpen={mobile_side}>
                     <SideHeader />
                     <SideContent activeMenu={activeMenu} />
