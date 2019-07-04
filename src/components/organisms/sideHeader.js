@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Circle } from "../atoms/circle";
+import Circle from "../atoms/circle";
 import Bio from "./bio";
 import ClickPopup from "../atoms/clickPopup";
 import { StaticQuery, graphql, Link } from "gatsby";

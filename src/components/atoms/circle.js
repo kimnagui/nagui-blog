@@ -6,11 +6,13 @@ const StyledCircle = styled.div`
     width: ${props => props.size + "px"};
     height: ${props => props.size + "px"};
     border-radius: 50%;
-    background-color: ${props => props.color};
+    background-color: ${props => props.color || "#000"};
     vertical-align: middle;
     margin: 0px 10px;
 `;
 
-export const Circle = ({ display, size, color }) => {
+const Circle = ({ display, size, color }) => {
     return <StyledCircle display={display} size={size} color={color} />;
 };
+
+export default Circle;
