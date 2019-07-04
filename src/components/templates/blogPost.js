@@ -31,7 +31,6 @@ const PostHeader = styled.div`
 
     hr {
         margin-bottom: 40px;
-        height: 0.5px;
     }
 `;
 
