@@ -2,6 +2,7 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 import styled from "styled-components";
 import Circle from "components/atoms/circle";
+import TagList from "components/organisms/tagList";
 import Layout from "./layout";
 import SEO from "../seo";
 
@@ -15,7 +16,7 @@ const PostHeader = styled.div`
     div {
         font-size: 13px;
         color: gray;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
 
         a,
         span {
@@ -30,6 +31,7 @@ const PostHeader = styled.div`
 
     hr {
         margin-bottom: 40px;
+        height: 0.5px;
     }
 `;
 
@@ -49,7 +51,12 @@ class BlogPost extends React.Component {
     render() {
         const post = this.props.data.markdownRemark;
         const siteTitle = this.props.data.site.siteMetadata.title;
-        const category = this.props.data.markdownRemark.frontmatter.category;
+        const {
+            title,
+            date,
+            category,
+            tags
+        } = this.props.data.markdownRemark.frontmatter;
         const { previous, next } = this.props.pageContext;
 
         return (
@@ -58,12 +65,9 @@ class BlogPost extends React.Component {
                 title={siteTitle}
                 activeMenu={category}
             >
-                <SEO
-                    title={post.frontmatter.title}
-                    description={post.excerpt}
-                />
+                <SEO title={title} description={post.excerpt} />
                 <PostHeader>
-                    <h1>{post.frontmatter.title}</h1>
+                    <h1>{title}</h1>
 
                     <div>
                         <Link to={`/category/${category}`}>{category}</Link>
@@ -72,14 +76,15 @@ class BlogPost extends React.Component {
                             size={"3"}
                             color={"gray"}
                         />
-                        <span>{post.frontmatter.date}</span>
+                        <span>{date}</span>
                     </div>
                     <hr />
                 </PostHeader>
                 <PostContent>
                     <div dangerouslySetInnerHTML={{ __html: post.html }} />
                 </PostContent>
-                <hr style={{ margin: "40px 0 20px 0" }} />
+                <TagList data={tags} />
+                <hr style={{ margin: "20px 0" }} />
 
                 <ul
                     style={{
@@ -149,6 +154,7 @@ export const pageQuery = graphql`
                 title
                 date(formatString: "MMMM DD, YYYY")
                 category
+                tags
             }
         }
     }
