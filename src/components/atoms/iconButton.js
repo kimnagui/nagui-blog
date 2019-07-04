@@ -8,8 +8,8 @@ const StyledIconButton = styled(IconButton)`
 
 export const IconBtn = ({ type, color, icon, onClick }) => {
     return (
-        <StyledIconButton type={type} btncolor={color} onClick={onClick}>
+        <button btncolor={color} onClick={onClick}>
             {icon}
-        </StyledIconButton>
+        </button>
     );
 };
