@@ -35,17 +35,11 @@ const PostHeader = styled.div`
     }
 `;
 
-const PostContent = styled.div``;
-
-{
-    /* 
-        [Todo]
-        1. 관련글 : 현재 게시물을 기준으로 카드형식의 좌우스크롤 가능한 같은 카테고리의 게시물 리스트
-        2. 공유 : 게시글 URL 복사기능 + 공유기능
-        3. 댓글 : utterances or disqus ??
-        4. 태그
-    */
-}
+const PostContent = styled.div`
+    .gatsby-highlight pre[class*="language-"] {
+        padding: 20px;
+    }
+`;
 
 class BlogPost extends React.Component {
     render() {
