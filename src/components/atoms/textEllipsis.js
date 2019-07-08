@@ -22,3 +22,5 @@ export const TextEllipsis = ({ text, line, color }) => {
         </StyledText>
     );
 };
+
+export default TextEllipsis;

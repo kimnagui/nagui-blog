@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import TagButton from "../molecules/tagButton";
+import TagButton from "../atoms/tagButton";
 
 const Container = styled.div`
     margin-top: 40px;

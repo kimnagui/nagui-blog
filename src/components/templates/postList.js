@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-import { PostListItem } from "components/organisms/postListItem";
-import { Pagination } from "components/organisms/pagination";
+import PostListItem from "components/organisms/postListItem";
+import Pagination from "components/organisms/pagination";
 
-export const PostList = ({ data, page, path, pageListSize }) => {
+const PostList = ({ data, page, path, pageListSize }) => {
     return (
         <Fragment>
             {data.map(({ node }) => {
@@ -21,3 +21,5 @@ export const PostList = ({ data, page, path, pageListSize }) => {
         </Fragment>
     );
 };
+
+export default PostList;

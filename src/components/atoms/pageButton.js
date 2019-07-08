@@ -36,3 +36,5 @@ export const PageButton = ({ link, children, active }) => {
         </StyledLink>
     );
 };
+
+export default PageButton;

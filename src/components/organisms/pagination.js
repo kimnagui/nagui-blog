@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { PageButton } from "../molecules/pageButton";
+import PageButton from "../atoms/pageButton";
 
 const StyledPagination = styled.div`
     display: flex;
@@ -10,7 +10,7 @@ const StyledPagination = styled.div`
     margin-top: 40px;
 `;
 
-export const Pagination = ({ page, path, listSize }) => {
+const Pagination = ({ page, path, listSize }) => {
     const totalPage = page.numberOfPages;
     const activePage = page.humanPageNumber;
 
@@ -63,3 +63,5 @@ export const Pagination = ({ page, path, listSize }) => {
         </StyledPagination>
     );
 };
+
+export default Pagination;

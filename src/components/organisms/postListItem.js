@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 import Image from "gatsby-image";
-import { TextEllipsis } from "components/atoms/textEllipsis";
+import TextEllipsis from "components/atoms/textEllipsis";
 
 const StyledLink = styled(Link)`
     display: flex;
@@ -36,7 +36,7 @@ const StyledImg = styled(Image)`
     margin-bottom: 0px;
 `;
 
-export const PostListItem = ({ node, title }) => {
+const PostListItem = ({ node, title }) => {
     const isCover = !!node.frontmatter.cover;
     return (
         <StyledLink to={node.fields.slug} cover={isCover ? 1 : 0}>
@@ -59,3 +59,5 @@ export const PostListItem = ({ node, title }) => {
         </StyledLink>
     );
 };
+
+export default PostListItem;

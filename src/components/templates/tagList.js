@@ -2,7 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "./layout";
 import SEO from "../seo";
-import { PostList } from "components/templates/postList";
+import PostList from "components/templates/postList";
 
 const TagsTemplate = ({ location, pageContext, data }) => {
     const tag = pageContext.tag;
