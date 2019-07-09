@@ -8,7 +8,7 @@ import PostInfo from "components/molecules/postInfo";
 const StyledLink = styled(Link)`
     display: flex;
     justify-content: space-between;
-    margin-bottom: ${props => (props.cover ? "20px" : "33px")};
+    margin-bottom: 20px;
 
     &:hover {
         text-decoration: none;
@@ -54,7 +54,7 @@ const PostListItem = ({ node }) => {
                 <TextEllipsis line={2} color={"gray"} text={node.excerpt} />
 
                 <PostInfo
-                    category={node.frontmatter.category}
+                    category={null}
                     date={node.frontmatter.date}
                     color={"#000"}
                 />
