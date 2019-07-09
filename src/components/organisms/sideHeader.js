@@ -5,13 +5,13 @@ import Bio from "./bio";
 import ClickPopup from "../atoms/clickPopup";
 import { StaticQuery, graphql, Link } from "gatsby";
 
-const StyledDiv = styled.div`
-    position: relative;
-`;
-
 const StyledSideHeader = styled.header`
     padding: 20px;
     font-size: 13px;
+`;
+
+const BioContainer = styled.div`
+    position: relative;
 `;
 
 const Author = styled.span`
@@ -51,16 +51,12 @@ const SideHeader = () => {
                 return (
                     <StyledSideHeader>
                         <BlogTitle to={"/"}>{node.title}</BlogTitle>
-                        <StyledDiv>
+                        <BioContainer>
                             <Author
                                 onClick={() => setBioOpen(true)}
                                 changeColor={bioOpen}
                             >
-                                <Circle
-                                    display={"inline-block"}
-                                    size={"13"}
-                                    color={"#49c39e"}
-                                />
+                                <Circle size={"13"} color={"#49c39e"} />
                                 {node.authorNickName}
                                 <i className="fas fa-chevron-down" />
                             </Author>
@@ -70,7 +66,7 @@ const SideHeader = () => {
                             >
                                 <Bio />
                             </ClickPopup>
-                        </StyledDiv>
+                        </BioContainer>
                     </StyledSideHeader>
                 );
             }}

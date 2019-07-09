@@ -2,7 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 
 import Layout from "components/templates/layout";
-import PostList from "components/templates/postList";
+import PostList from "components/organisms/postList";
 import SEO from "components/seo";
 
 class BlogIndex extends React.Component {

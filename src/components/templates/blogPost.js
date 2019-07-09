@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 import styled from "styled-components";
-import Circle from "components/atoms/circle";
-import TagList from "components/organisms/tagList";
+import PostInfo from "components/molecules/postInfo";
+import TagList from "components/molecules/tagList";
 import Layout from "./layout";
 import SEO from "../seo";
 
@@ -13,22 +13,6 @@ const PostHeader = styled.div`
         border: none;
     }
 
-    div {
-        font-size: 13px;
-        color: gray;
-        margin-bottom: 20px;
-
-        a,
-        span {
-            color: inherit;
-            vertical-align: middle;
-        }
-
-        div {
-            margin: 0 10px;
-        }
-    }
-
     hr {
         margin-bottom: 40px;
     }
@@ -37,6 +21,14 @@ const PostHeader = styled.div`
 const PostContent = styled.div`
     .gatsby-highlight pre[class*="language-"] {
         padding: 20px;
+    }
+`;
+
+const PostFooter = styled.div`
+    margin-top: 40px;
+
+    hr {
+        margin: 20px 0;
     }
 `;
 
@@ -59,25 +51,21 @@ class BlogPost extends React.Component {
                 activeMenu={category}
             >
                 <SEO title={title} description={post.excerpt} />
+
                 <PostHeader>
                     <h1>{title}</h1>
-
-                    <div>
-                        <Link to={`/category/${category}`}>{category}</Link>
-                        <Circle
-                            display={"inline-block"}
-                            size={"3"}
-                            color={"gray"}
-                        />
-                        <span>{date}</span>
-                    </div>
+                    <PostInfo category={category} date={date} />
                     <hr />
                 </PostHeader>
+
                 <PostContent>
                     <div dangerouslySetInnerHTML={{ __html: post.html }} />
                 </PostContent>
-                <TagList data={tags} />
-                <hr style={{ margin: "20px 0" }} />
+
+                <PostFooter>
+                    <TagList data={tags} />
+                    <hr />
+                </PostFooter>
 
                 <ul
                     style={{

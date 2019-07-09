@@ -2,24 +2,25 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "./layout";
 import SEO from "../seo";
-import PostList from "components/templates/postList";
+import PostList from "components/organisms/postList";
 
-const CategoryList = ({ location, pageContext, data }) => {
-    const category = pageContext.category;
+const TagsTemplate = ({ location, pageContext, data }) => {
+    const tag = pageContext.tag;
+    const category = "";
 
     return (
         <Layout
             location={location}
-            title={`"${category}" 관련 글 목록`}
+            title={`"${tag}" 관련 글 목록`}
             activeMenu={category}
         >
             <div>
-                <SEO title={`"${category}" 관련 글 목록`} />
+                <SEO title={`"${tag}" 관련 글 목록`} />
 
                 <PostList
                     data={data.allMarkdownRemark.edges}
                     page={pageContext}
-                    path={`/category/${category}`}
+                    path={`/tags/${tag}`}
                     pageListSize={data.site.siteMetadata.pageListSize}
                 />
             </div>
@@ -28,7 +29,7 @@ const CategoryList = ({ location, pageContext, data }) => {
 };
 
 export const pageQuery = graphql`
-    query($skip: Int!, $limit: Int!, $category: String) {
+    query($skip: Int!, $limit: Int!, $tag: String) {
         site {
             siteMetadata {
                 pageListSize
@@ -36,7 +37,7 @@ export const pageQuery = graphql`
         }
         allMarkdownRemark(
             sort: { fields: [frontmatter___date], order: DESC }
-            filter: { frontmatter: { category: { eq: $category } } }
+            filter: { frontmatter: { tags: { in: [$tag] } } }
             skip: $skip
             limit: $limit
         ) {
@@ -66,4 +67,4 @@ export const pageQuery = graphql`
     }
 `;
 
-export default CategoryList;
+export default TagsTemplate;

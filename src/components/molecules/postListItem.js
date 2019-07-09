@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "gatsby";
 import Image from "gatsby-image";
 import TextEllipsis from "components/atoms/textEllipsis";
+import PostInfo from "components/molecules/postInfo";
 
 const StyledLink = styled(Link)`
     display: flex;
@@ -36,18 +37,27 @@ const StyledImg = styled(Image)`
     margin-bottom: 0px;
 `;
 
-const PostListItem = ({ node, title }) => {
+const PostListItem = ({ node }) => {
     const isCover = !!node.frontmatter.cover;
+
     return (
         <StyledLink to={node.fields.slug} cover={isCover ? 1 : 0}>
             <div>
                 <h3>
-                    <TextEllipsis line={1} color={"black"} text={title} />
+                    <TextEllipsis
+                        line={1}
+                        color={"black"}
+                        text={node.frontmatter.title}
+                    />
                 </h3>
 
                 <TextEllipsis line={2} color={"gray"} text={node.excerpt} />
 
-                <small>{node.frontmatter.date}</small>
+                <PostInfo
+                    category={node.frontmatter.category}
+                    date={node.frontmatter.date}
+                    color={"#000"}
+                />
             </div>
             {isCover && (
                 <div>

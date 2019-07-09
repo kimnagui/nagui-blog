@@ -3,7 +3,7 @@ import styled from "styled-components";
 import TagButton from "../atoms/tagButton";
 
 const Container = styled.div`
-    margin-top: 40px;
+    /* margin-top: 40px; */
 `;
 
 const TagList = ({ data }) => {
