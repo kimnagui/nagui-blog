@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 import Circle from "components/atoms/circle";
@@ -22,8 +22,13 @@ const Container = styled.div`
 const PostInfo = ({ category, date, size, color }) => {
     return (
         <Container color={color} size={size}>
-            <Link to={`/category/${category}`}>{category}</Link>
-            <Circle size={"3"} color={color} />
+            {category && (
+                <Fragment>
+                    <Link to={`/category/${category}`}>{category}</Link>
+                    <Circle size={"3"} color={color} />
+                </Fragment>
+            )}
+
             <span>{date}</span>
         </Container>
     );
