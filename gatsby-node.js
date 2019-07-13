@@ -24,6 +24,14 @@ exports.createPages = ({ graphql, actions }) => {
                                 title
                                 tags
                                 category
+                                date(formatString: "YYYY-MM-DD")
+                                cover {
+                                    childImageSharp {
+                                        fixed(width: 1000) {
+                                            src
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -37,19 +45,46 @@ exports.createPages = ({ graphql, actions }) => {
         const posts = result.data.allMarkdownRemark.edges;
         let tags = [];
         let category = [];
+        let recentCategoryPosts = {};
 
         // Create blog posts pages.
         posts.forEach((post, index) => {
             const previous =
                 index === posts.length - 1 ? null : posts[index + 1].node;
             const next = index === 0 ? null : posts[index - 1].node;
+            const cat = post.node.frontmatter.category;
 
-            tags = Array.from(
-                new Set([...tags, ...post.node.frontmatter.tags])
-            );
-            category = Array.from(
-                new Set([...category, ...[post.node.frontmatter.category]])
-            );
+            // Create tag & category list
+            if (post.node.frontmatter.tags) {
+                tags = Array.from(
+                    new Set([...tags, ...post.node.frontmatter.tags])
+                );
+            }
+
+            if (cat) {
+                category = Array.from(new Set([...category, ...[cat]]));
+            }
+
+            // Create recent category posts
+            if (!recentCategoryPosts[cat]) {
+                let list = [];
+
+                for (let i = 0; i < posts.length; i++) {
+                    if (cat === posts[i].node.frontmatter.category) {
+                        list.push(posts[i]);
+                        if (list.length === 4) {
+                            break;
+                        }
+                    }
+                }
+
+                recentCategoryPosts = {
+                    ...recentCategoryPosts,
+                    [cat]: list
+                };
+            }
+
+            const recent = recentCategoryPosts[cat];
 
             createPage({
                 path: post.node.fields.slug,
@@ -57,7 +92,8 @@ exports.createPages = ({ graphql, actions }) => {
                 context: {
                     slug: post.node.fields.slug,
                     previous,
-                    next
+                    next,
+                    recent
                 }
             });
         });
@@ -71,8 +107,10 @@ exports.createPages = ({ graphql, actions }) => {
         });
 
         category.forEach(cat => {
-            const catEdges = posts.filter(({ node }) =>
-                node.frontmatter.category.includes(cat)
+            const catEdges = posts.filter(
+                ({ node }) =>
+                    node.frontmatter.category &&
+                    node.frontmatter.category.includes(cat)
             );
             paginate({
                 createPage,
@@ -80,7 +118,7 @@ exports.createPages = ({ graphql, actions }) => {
                 itemsPerPage: siteConfig.postsPerPage,
                 pathPrefix: `/category/${cat}`,
                 component: path.resolve(
-                    "./src/components/templates/categoryList.js"
+                    "./src/components/templates/index4Category.js"
                 ),
                 context: {
                     category: `${cat}`
@@ -89,8 +127,9 @@ exports.createPages = ({ graphql, actions }) => {
         });
 
         tags.forEach(tag => {
-            const tagEdges = posts.filter(({ node }) =>
-                node.frontmatter.tags.includes(tag)
+            const tagEdges = posts.filter(
+                ({ node }) =>
+                    node.frontmatter.tags && node.frontmatter.tags.includes(tag)
             );
             paginate({
                 createPage,
@@ -98,7 +137,7 @@ exports.createPages = ({ graphql, actions }) => {
                 itemsPerPage: siteConfig.postsPerPage,
                 pathPrefix: `/tags/${tag}`,
                 component: path.resolve(
-                    "./src/components/templates/tagList.js"
+                    "./src/components/templates/index4Tag.js"
                 ),
                 context: {
                     tag: `${tag}`
