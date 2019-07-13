@@ -1,8 +1,9 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 import styled from "styled-components";
 import PostInfo from "components/molecules/postInfo";
 import TagList from "components/molecules/tagList";
+import RecentPostList from "components/organisms/recentPostList";
 import Layout from "./layout";
 import SEO from "../seo";
 
@@ -14,7 +15,7 @@ const PostHeader = styled.div`
     }
 
     hr {
-        margin-bottom: 40px;
+        margin: 20px 0 40px 0;
     }
 `;
 
@@ -42,7 +43,7 @@ class BlogPost extends React.Component {
             category,
             tags
         } = this.props.data.markdownRemark.frontmatter;
-        const { previous, next } = this.props.pageContext;
+        const { recent } = this.props.pageContext;
 
         return (
             <Layout
@@ -65,53 +66,10 @@ class BlogPost extends React.Component {
                 <PostFooter>
                     <TagList data={tags} />
                     <hr />
+                    {category && (
+                        <RecentPostList category={category} data={recent} />
+                    )}
                 </PostFooter>
-
-                <ul
-                    style={{
-                        display: `flex`,
-                        flexWrap: `wrap`,
-                        justifyContent: `space-between`,
-                        listStyle: `none`,
-                        padding: 0,
-                        marginLeft: 0
-                    }}
-                >
-                    <li>
-                        {previous && (
-                            <Link
-                                to={previous.fields.slug}
-                                rel="prev"
-                                style={{
-                                    padding: "5px 10px",
-                                    backgroundColor: "#3f0f3f",
-                                    borderRadius: "6px",
-                                    color: "#fff",
-                                    textDecoration: "none"
-                                }}
-                            >
-                                ← {previous.frontmatter.title}
-                            </Link>
-                        )}
-                    </li>
-                    <li>
-                        {next && (
-                            <Link
-                                to={next.fields.slug}
-                                rel="next"
-                                style={{
-                                    padding: "5px 10px",
-                                    backgroundColor: "#3f0f3f",
-                                    borderRadius: "6px",
-                                    color: "#fff",
-                                    textDecoration: "none"
-                                }}
-                            >
-                                {next.frontmatter.title} →
-                            </Link>
-                        )}
-                    </li>
-                </ul>
             </Layout>
         );
     }

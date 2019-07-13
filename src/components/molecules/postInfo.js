@@ -6,7 +6,6 @@ import Circle from "components/atoms/circle";
 const Container = styled.div`
     font-size: ${props => (props.size ? props.size + "px" : "13px")};
     color: ${props => props.color || "#808080"};
-    margin-bottom: 20px;
 
     a,
     span {

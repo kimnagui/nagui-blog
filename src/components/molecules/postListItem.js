@@ -8,33 +8,32 @@ import PostInfo from "components/molecules/postInfo";
 const StyledLink = styled(Link)`
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 
     &:hover {
         text-decoration: none;
     }
 
-    h3 {
-        margin: 0;
-        margin-bottom: 5px;
-        flex: 1 1 auto;
-        color: #000;
-    }
-
-    div:first-child {
+    #content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
         padding-right: 10px;
-    }
+        overflow: hidden;
 
-    small {
-        color: #000;
+        h3 {
+            margin: 0;
+            margin-bottom: 5px;
+            color: #000;
+        }
     }
 `;
 
 const StyledImg = styled(Image)`
-    width: 100px;
-    height: 100px;
-    max-width: inherit;
-    margin-bottom: 0px;
+    width: 120px;
+    height: 120px;
+    /* max-width: inherit; */
+    /* margin-bottom: 0px; */
 `;
 
 const PostListItem = ({ node }) => {
@@ -42,22 +41,14 @@ const PostListItem = ({ node }) => {
 
     return (
         <StyledLink to={node.fields.slug} cover={isCover ? 1 : 0}>
-            <div>
+            <div id="content">
                 <h3>
-                    <TextEllipsis
-                        line={1}
-                        color={"black"}
-                        text={node.frontmatter.title}
-                    />
+                    <TextEllipsis line={1} text={node.frontmatter.title} />
                 </h3>
 
-                <TextEllipsis line={2} color={"gray"} text={node.excerpt} />
+                <TextEllipsis line={2} color={"#808080"} text={node.excerpt} />
 
-                <PostInfo
-                    category={null}
-                    date={node.frontmatter.date}
-                    color={"#000"}
-                />
+                <PostInfo date={node.frontmatter.date} color={"#000"} />
             </div>
             {isCover && (
                 <div>
