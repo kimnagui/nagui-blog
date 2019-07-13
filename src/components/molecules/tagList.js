@@ -9,11 +9,12 @@ const Container = styled.div`
 const TagList = ({ data }) => {
     return (
         <Container>
-            {data.map(node => (
-                <TagButton key={node} link={`tags/${node}`}>
-                    #{node}
-                </TagButton>
-            ))}
+            {data &&
+                data.map(node => (
+                    <TagButton key={node} link={`tags/${node}`}>
+                        #{node}
+                    </TagButton>
+                ))}
         </Container>
     );
 };
