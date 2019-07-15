@@ -85,19 +85,6 @@ export default class Layout extends React.Component {
     }
 
     sideToggle = e => {
-        // 0. const sidebar = document.getElementById("sidebar");
-        // 1. sidebar.classList.toggle("sidebar-open");
-        // -- 스타일드컴포넌트는 class 또는 className 을 적용할 수 없음, 꼭 적용해야한다면 별도의 css 파일을 임포트해야함.
-        // 2. console.log(sidebar.style.marginLeft);
-        // -- 초기 렌더링 됬을때의 element style의 값은 비워져 있음.
-        // 3. const startPoint = sidebar.getBoundingClientRect().left;
-        // if (startPoint != 0) {
-        //     sidebar.style.marginLeft = 0;
-        // } else {
-        //     sidebar.style.marginLeft = "-80%";
-        // }
-        // -- 모바일 장치일때 사이드바 오픈 상태를 관리할 수 없음.
-
         const open = !this.state.mobile_side;
         this.setState({
             mobile_side: open

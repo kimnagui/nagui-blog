@@ -10,7 +10,6 @@ const Container = styled.div`
     @media all and (min-width: 992px) {
         display: ${props => props.display || "inline-block"};
         width: 25%;
-        max-width: 300px;
     }
 `;
 

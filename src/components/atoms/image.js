@@ -1,4 +1,5 @@
 import Img from "gatsby-image";
+import { graphql } from "gatsby";
 
 const Image = props => (
     <StaticQuery
@@ -31,3 +32,5 @@ const Image = props => (
         }}
     />
 );
+
+export default Image;

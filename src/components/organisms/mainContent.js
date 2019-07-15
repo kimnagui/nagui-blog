@@ -6,7 +6,7 @@ const StyledMainContent = styled.section`
     padding: 20px;
 
     @media all and (min-width: 992px) {
-        padding: 20px 30px;
+        padding: 50px 75px;
     }
 `;
 

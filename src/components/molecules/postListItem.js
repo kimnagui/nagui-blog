@@ -32,8 +32,7 @@ const StyledLink = styled(Link)`
 const StyledImg = styled(Image)`
     width: 120px;
     height: 120px;
-    /* max-width: inherit; */
-    /* margin-bottom: 0px; */
+    border-radius: 10px;
 `;
 
 const PostListItem = ({ node }) => {
