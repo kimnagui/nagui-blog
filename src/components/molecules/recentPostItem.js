@@ -18,7 +18,6 @@ const Cover = styled(Link)`
     margin: 0 !important;
     width: 100%;
     height: 100px;
-    background-color: #808080;
     background-image: url(${props => props.image});
     background-size: cover;
     background-position: 50% 50%;

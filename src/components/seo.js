@@ -18,6 +18,7 @@ function SEO({ description, lang, meta, keywords, title }) {
                     siteMetadata {
                         title
                         description
+                        defaultKeywords
                         authorNickName
                     }
                 }
@@ -26,7 +27,7 @@ function SEO({ description, lang, meta, keywords, title }) {
     );
 
     const metaDescription = description || site.siteMetadata.description;
-
+    const defaultKeywords = site.siteMetadata.defaultKeywords;
     return (
         <Helmet
             htmlAttributes={{
@@ -66,17 +67,15 @@ function SEO({ description, lang, meta, keywords, title }) {
                 {
                     name: `twitter:description`,
                     content: metaDescription
+                },
+                {
+                    name: `keywords`,
+                    content:
+                        keywords.length > 0
+                            ? defaultKeywords.concat(keywords.join(`, `))
+                            : defaultKeywords
                 }
-            ]
-                .concat(
-                    keywords.length > 0
-                        ? {
-                              name: `keywords`,
-                              content: keywords.join(`, `)
-                          }
-                        : []
-                )
-                .concat(meta)}
+            ].concat(meta)}
         />
     );
 }

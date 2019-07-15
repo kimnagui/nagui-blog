@@ -1,1 +1,3 @@
-# nagui-blog
+# Nagui's Blog
+
+-   <http://nagui.me/>

@@ -51,7 +51,11 @@ class BlogPost extends React.Component {
                 title={siteTitle}
                 activeMenu={category}
             >
-                <SEO title={title} description={post.excerpt} />
+                <SEO
+                    title={title}
+                    description={post.excerpt}
+                    keywords={tags || []}
+                />
 
                 <PostHeader>
                     <h1>{title}</h1>

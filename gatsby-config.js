@@ -4,9 +4,9 @@ const siteConfig = require("./config.js");
 
 module.exports = {
     siteMetadata: {
-        siteUrl: siteConfig.url,
         title: siteConfig.title,
         description: siteConfig.description,
+        defaultKeywords: siteConfig.defaultKeywords,
         copyright: siteConfig.copyright,
         authorNickName: siteConfig.authorNickName,
         authorFullName: siteConfig.authorFullName,
@@ -95,19 +95,6 @@ module.exports = {
                 head: true
             }
         },
-        `gatsby-plugin-feed`,
-        {
-            resolve: `gatsby-plugin-manifest`,
-            options: {
-                name: `Nagui Blog`,
-                short_name: `Nagui`,
-                start_url: `/`,
-                background_color: `#ffffff`,
-                theme_color: `#663399`,
-                display: `standalone`,
-                icon: `content/assets/favicon.png`
-            }
-        },
         `gatsby-plugin-offline`,
         `gatsby-plugin-react-helmet`,
         {
@@ -119,7 +106,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-s3`,
             options: {
-                bucketName: "nagui.me"
+                bucketName: siteConfig.s3Bucket
             }
         },
         {

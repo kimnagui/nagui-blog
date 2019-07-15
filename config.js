@@ -3,10 +3,11 @@ module.exports = {
 
     title: "Nagui.me",
     description: "KimNagui's Blog",
+    defaultKeywords: [`blog`, `gatsby`, `javascript`, `react`, `kimnagui`],
 
     authorNickName: "KimNagui",
     authorFullName: "KimGwangHyeon",
-    authorDescription: "#프론트엔드개발자 #칠러",
+    authorDescription: "#FrontendDeveloper #Chiller",
     photo: "content/assets/profile-pic.png",
 
     // icon : FontAwesome
@@ -18,11 +19,11 @@ module.exports = {
         {
             id: "여행",
             icon: "fa-plane-departure"
-        },
-        {
-            id: "공부",
-            icon: "fa-book-open"
         }
+        // {
+        //     id: "공부",
+        //     icon: "fa-book-open"
+        // }
     ],
 
     social: {
@@ -34,5 +35,6 @@ module.exports = {
     pageListSize: 5,
 
     copyright: "© All rights reserved.",
-    googleAnalyticsId: "UA-143311992-1"
+    googleAnalyticsId: "UA-143311992-1",
+    s3Bucket: "nagui.me"
 };
