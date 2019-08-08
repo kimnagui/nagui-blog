@@ -12,16 +12,45 @@ const PostHeader = styled.div`
         padding: 0;
         margin-bottom: 10px;
         border: none;
+        color: ${props => props.theme.blogpost.title};
     }
 
     hr {
         margin: 20px 0 40px 0;
+        background-color: ${props => props.theme.blogpost.hr};
+    }
+
+    div {
+        color: ${props => props.theme.blogpost.info};
+        #circle {
+            background-color: ${props => props.theme.blogpost.info};
+        }
     }
 `;
 
 const PostContent = styled.div`
-    .gatsby-highlight pre[class*="language-"] {
-        padding: 20px;
+    color: ${props => props.theme.blogpost.content.default};
+    a {
+        color: ${props => props.theme.blogpost.content.link};
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .gatsby-highlight {
+        margin: 24px 0;
+        border-radius: 10px;
+        pre[class*="language-"] {
+            padding: 10px 15px;
+        }
+    }
+
+    blockquote {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: calc(0.8125rem - 1px);
+        border-left: 4px solid ${props => props.theme.blogpost.content.quote};
+        color: ${props => props.theme.blogpost.content.quote};
     }
 `;
 
@@ -30,6 +59,7 @@ const PostFooter = styled.div`
 
     hr {
         margin: 20px 0;
+        background-color: ${props => props.theme.blogpost.hr};
     }
 `;
 
@@ -41,7 +71,8 @@ class BlogPost extends React.Component {
             title,
             date,
             category,
-            tags
+            tags,
+            cover
         } = this.props.data.markdownRemark.frontmatter;
         const { recent } = this.props.pageContext;
 
@@ -54,12 +85,13 @@ class BlogPost extends React.Component {
                 <SEO
                     title={title}
                     description={post.excerpt}
+                    image={!!cover && cover.childImageSharp.fluid.src}
                     keywords={tags || []}
                 />
 
                 <PostHeader>
                     <h1>{title}</h1>
-                    <PostInfo category={category} date={date} />
+                    <PostInfo category={category} date={date} link={true} />
                     <hr />
                 </PostHeader>
 
@@ -98,6 +130,13 @@ export const pageQuery = graphql`
                 date(formatString: "YYYY-MM-DD")
                 category
                 tags
+                cover {
+                    childImageSharp {
+                        fluid(maxWidth: 500) {
+                            src
+                        }
+                    }
+                }
             }
         }
     }

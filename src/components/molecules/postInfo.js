@@ -5,12 +5,17 @@ import Circle from "components/atoms/circle";
 
 const Container = styled.div`
     font-size: ${props => (props.size ? props.size + "px" : "13px")};
-    color: ${props => props.color || "#808080"};
 
-    a,
     span {
+        vertical-align: middle;
+    }
+
+    a {
         color: inherit;
         vertical-align: middle;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     div {
@@ -18,13 +23,17 @@ const Container = styled.div`
     }
 `;
 
-const PostInfo = ({ category, date, size, color }) => {
+const PostInfo = ({ category, date, size, link }) => {
     return (
-        <Container color={color} size={size}>
+        <Container size={size}>
             {category && (
                 <Fragment>
-                    <Link to={`/category/${category}`}>{category}</Link>
-                    <Circle size={"3"} color={color} />
+                    {link ? (
+                        <Link to={`/category/${category}`}>{category}</Link>
+                    ) : (
+                        <span>{category}</span>
+                    )}
+                    <Circle size={"3"} />
                 </Fragment>
             )}
 

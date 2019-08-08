@@ -4,9 +4,12 @@ const siteConfig = require("./config.js");
 
 module.exports = {
     siteMetadata: {
+        siteUrl: siteConfig.url,
         title: siteConfig.title,
+        lang: siteConfig.lang,
         description: siteConfig.description,
         defaultKeywords: siteConfig.defaultKeywords,
+        defaultMetaImage: siteConfig.defaultMetaImage,
         copyright: siteConfig.copyright,
         authorNickName: siteConfig.authorNickName,
         authorFullName: siteConfig.authorFullName,
@@ -37,6 +40,7 @@ module.exports = {
             resolve: `gatsby-transformer-remark`,
             options: {
                 plugins: [
+                    `gatsby-remark-emoji`,
                     {
                         resolve: `gatsby-remark-images`,
                         options: {
@@ -85,7 +89,8 @@ module.exports = {
                 src: `${__dirname}/src`,
                 components: `${__dirname}/src/components`,
                 pages: `${__dirname}/src/pages`,
-                utils: `${__dirname}/src/utils`
+                utils: `${__dirname}/src/utils`,
+                themes: `${__dirname}/src/themes`
             }
         },
         {

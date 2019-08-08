@@ -24,7 +24,7 @@ const Cover = styled(Link)`
     border-radius: 10px;
 
     &:hover {
-        text-decoration: none;
+        text-decoration: underline #fff;
     }
 
     div {
@@ -32,8 +32,8 @@ const Cover = styled(Link)`
         flex-direction: column;
         justify-content: flex-end;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #fff;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: ${props => props.theme.recentpostitem.text};
         padding: 10px;
         border-radius: inherit;
 

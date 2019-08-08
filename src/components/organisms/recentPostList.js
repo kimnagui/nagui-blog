@@ -8,8 +8,13 @@ const PostList = styled.div`
         font-weight: bold;
         margin: 0;
         padding: 0 10px 10px 10px;
+        color: ${props => props.theme.recentpostlist.header};
 
         a {
+            color: ${props => props.theme.recentpostlist.category};
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 `;
