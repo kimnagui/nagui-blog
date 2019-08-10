@@ -5,8 +5,10 @@ category: "공부"
 tags:
     - AWS
     - Codecommit
-cover: ./macoskeychain.png
+cover: ./aws_codecommit.png
 ---
+
+![](./aws_codecommit.png)
 
 ## Issue
 
@@ -48,7 +50,7 @@ cover: ./macoskeychain.png
 2. keychain 에서 **git-codecommit** 을 검색해서 해당되는 키를 삭제
 3. 해당 프로젝트 디렉토리에서 git 명령 수행하면 묻는 Username과 Password 입력
 4. keychain 에서 **git-codecommit** 을 검색해서 해당되는 키의 정보보기에서 **[계정]**항목이 키가 아니라 Username으로 되있다면 성공
-   ![스크린샷 2019-08-07 오후 3 35 50](https://user-images.githubusercontent.com/48215197/62600200-3d044b00-b929-11e9-8a0c-8e52fd6ff4f9.png)
+   ![](macoskeychain.png)
 
 ## Conclusion
 
