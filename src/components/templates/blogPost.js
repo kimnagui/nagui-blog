@@ -37,6 +37,14 @@ const PostContent = styled.div`
         }
     }
 
+    h2 {
+        display: inline-block;
+        margin-top: 50px;
+        padding: 5px;
+        color: #000;
+        background-color: #49c39e;
+    }
+
     .gatsby-highlight {
         margin: 24px 0;
         border-radius: 10px;
