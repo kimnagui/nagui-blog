@@ -1,11 +1,11 @@
 ---
-title: AWS Codecommit unable to access 403
+title: "[AWS] Codecommit unable to access 403"
 date: "2019-08-08"
 category: "공부"
 tags:
     - AWS
     - Codecommit
-cover: ./aws_codecommit.png
+cover: ./aws.png
 ---
 
 ![](./aws_codecommit.png)
