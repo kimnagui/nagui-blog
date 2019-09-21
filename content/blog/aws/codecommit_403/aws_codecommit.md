@@ -5,7 +5,7 @@ category: "공부"
 tags:
     - AWS
     - Codecommit
-cover: ./aws.png
+cover: ../aws.png
 ---
 
 ![](./aws_codecommit.png)

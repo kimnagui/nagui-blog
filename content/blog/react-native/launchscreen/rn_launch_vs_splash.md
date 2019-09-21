@@ -7,7 +7,7 @@ tags:
     - Launch Screen
     - Splash Screen
     - generator-rn-toolbox
-cover: ./react-native.jpg
+cover: ../react-native.jpg
 ---
 
 React Native 개발을 하면서 앱 실행 초기화면을 어디서는 Launch Screen 이라하고 어디서는 Splash Screen 이라고 하길래 다른 건가 싶어서 찾아보았다.

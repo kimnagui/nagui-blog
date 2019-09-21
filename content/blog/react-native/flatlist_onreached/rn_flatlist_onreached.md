@@ -8,7 +8,7 @@ tags:
     - InfinityScroll
     - onEndReached
     - onEndReachedThreshold
-cover: ./react-native.jpg
+cover: ../react-native.jpg
 ---
 
 React Native 에서 무한 스크롤을 구현할 수 있는 방법은 여러가지가 있는데 그 중 대표적인 한가지가 FlatList의 onEndReached를 이용해서 무한스크롤을 구현하는 방법이다.
