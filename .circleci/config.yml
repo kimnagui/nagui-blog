@@ -54,7 +54,10 @@ jobs:
           command: 'yarn build && yarn deploy'
 workflows:
   version: 2.1
-  test:
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
     jobs:
       - test
   build:
