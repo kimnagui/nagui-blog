@@ -1,33 +1,59 @@
 version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@0.1.16
+
 jobs:
   setup:
     docker:
       - image: circleci/node:latest
+    working_directory: ~/application
     steps:
       - checkout
-      - run:
-          name: Check Files
-          command: 'ls -al'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Install Package
           command: 'yarn install'
-  # build_and_deploy:
-  #   docker:
-  #     - image: circleci/node:latest
-  #   steps:
-  #     - run:
-  #         name: Deploy
-  #         command: |
-  #           yarn build && yarn deploy
+      - save_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+        paths:
+          - node_modules
+      - save_cache:
+        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+          - ~/application
+      - run:
+          name: Check
+          command: 'ls -al'
+  aws-cli:
+    executor: aws-cli/default
+    steps:
+      - aws-cli/setup:
+          profile-name: default
+  build_and_deploy:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/application
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Deploy
+          command: 'yarn build && yarn deploy'
 workflows:
   version: 2.1
   build:
     jobs:
       - setup
-      # - build_and_deploy:
-      #     requires:
-      #       - setup
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
+      - aws-cli
+      - build_and_deploy:
+          requires:
+            - setup
+            - aws-cli
+          filters:
+            branches:
+              only:
+                - master
