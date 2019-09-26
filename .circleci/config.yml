@@ -50,6 +50,7 @@ workflows:
     jobs:
       - setup
       - build_and_deploy:
+          type: approval
           context: aws
           requires:
             - setup
