@@ -10,22 +10,25 @@ jobs:
     working_directory: ~/application
     steps:
       - checkout
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Install Package
-          command: yarn install
+          command: 'yarn install'
       - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-        paths:
-          - node_modules
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
       - save_cache:
-        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-        paths:
-          - ~/application
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/application
       - run:
           name: Check
-          command: ls -al
+          command: 'ls -al'
   aws-cli:
     executor: aws-cli/default
     steps:
@@ -42,14 +45,14 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Deploy
-          command: yarn build && yarn deploy
+          command: 'yarn build && yarn deploy'
 workflows:
   version: 2.1
   build:
     jobs:
       - setup
-      - aws-cli
-        context: aws
+      - aws-cli:
+          context: aws
       - build_and_deploy:
           requires:
             - setup
