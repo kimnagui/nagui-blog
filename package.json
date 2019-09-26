@@ -64,6 +64,6 @@
     "scripts": {
         "dev": "gatsby develop",
         "build": "gatsby build",
-        "deploy": "gatsby-plugin-s3 deploy"
+        "deploy": "gatsby-plugin-s3 deploy -y"
     }
 }

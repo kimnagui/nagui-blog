@@ -1,0 +1,32 @@
+version: 2.1
+jobs:
+  setup:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/
+    steps:
+      - checkout
+      - run:
+          name: Install Package
+          command: 'yarn install'
+  build_and_deploy:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/
+    steps:
+      - run:
+          name: Deploy
+          command: |
+            yarn build && yarn deploy
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - setup
+      - build_and_deploy:
+          requires:
+            - setup
+          filters:
+            branches:
+              only:
+                - master
