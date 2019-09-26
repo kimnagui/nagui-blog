@@ -28,17 +28,15 @@ jobs:
             - ~/application
       - run:
           name: Check
-          command: 'ls -al'
-  aws-cli:
-    executor: aws-cli/default
-    steps:
-      - aws-cli/setup:
-          profile-name: default
+          command: 'pwd && ls -al'
   build_and_deploy:
     docker:
       - image: circleci/node:latest
     working_directory: ~/application
+    executor: aws-cli/default
     steps:
+      - aws-cli/setup:
+          profile-name: default
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
@@ -51,12 +49,10 @@ workflows:
   build:
     jobs:
       - setup
-      - aws-cli:
-          context: aws
       - build_and_deploy:
+          context: aws
           requires:
             - setup
-            - aws-cli
           filters:
             branches:
               only:
