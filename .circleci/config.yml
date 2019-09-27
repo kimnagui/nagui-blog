@@ -1,17 +1,34 @@
 version: 2.1
 
+#################################################################################
+
+template_work_test_cd: &work_test_cd
+  requires:
+    - setup
+  context: aws # test context : aws + server env var
+
+template_work_stag_cd: &work_stag_cd
+  requires:
+    - hold
+  context: aws # stag context : aws + server env var
+
+template_work_prod_cd: &work_prod_cd
+  requires:
+    - hold
+  context: aws # prod context : aws + server env var
+
+template_job_common_cd: &job_common_cd
+  docker:
+    - image: circleci/node:latest
+  working_directory: ~/application
+  executor: aws-cli/default
+
+#################################################################################
+
 orbs:
   aws-cli: circleci/aws-cli@0.1.16
 
 jobs:
-  test:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/test
-    steps:
-      - run:
-          name: Test
-          command: echo "gg !!"
   setup:
     docker:
       - image: circleci/node:latest
@@ -19,7 +36,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Update npm
+          name: Update NPM
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -31,45 +48,107 @@ jobs:
           paths:
             - node_modules
       - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/application
-  build_and_deploy:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/application
-    executor: aws-cli/default
+  test_cd:
+    <<: *job_common_cd
     steps:
       - aws-cli/setup:
           profile-name: default
       - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
+      # 설정 변경 로직 추가할 곳
+      # - run:
+      #     name: Deploy TEST
+      #     command: 'yarn build && yarn deploy'
       - run:
-          name: Deploy
+          name: Echo TEST
+          command: echo 'TEST'
+  stag_cd:
+    <<: *job_common_cd
+    steps:
+      - aws-cli/setup:
+          profile-name: default
+      - restore_cache:
+          key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      # 설정 변경 로직 추가할 곳
+      # - run:
+      #     name: Deploy STAG
+      #     command: 'yarn build && yarn deploy'
+      - run:
+          name: Echo STAG
+          command: echo 'STAG'
+  prod_cd:
+    <<: *job_common_cd
+    steps:
+      - aws-cli/setup:
+          profile-name: default
+      - restore_cache:
+          key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      # 설정 변경 로직 추가할 곳
+      - run:
+          name: Deploy PROD
           command: 'yarn build && yarn deploy'
+      - run:
+          name: Echo PROD
+          command: echo 'PROD'
+
 workflows:
   version: 2.1
-  nightly:
+  schedule_release_build:
     triggers:
       - schedule:
-          cron: "0 1 * * *"
+          cron: "0 19 * * *"
+          filters:
+            branches:
+              only:
+                - /release.*/
+    jobs:
+      - setup:
+          filters:
+            branches:
+              only:
+                - /release.*/
+      - test_cd:
+          <<: *work_test_cd
+      - hold:
+          type: approval
+          requires:
+            - test_cd
+      - stag_cd:
+          <<: *work_stag_cd
+  commit_release_build:
+    jobs:
+      - setup:
+          filters:
+            branches:
+              only:
+                - /release.*/
+      - test_cd:
+          <<: *work_test_cd
+      - hold:
+          type: approval
+          requires:
+            - test_cd
+      - stag_cd:
+          <<: *work_stag_cd
+  commit_production_build:
+    jobs:
+      - setup:
           filters:
             branches:
               only:
                 - master
-    jobs:
-      - test
-  build:
-    jobs:
-      - setup
-      - build_and_deploy:
+      - hold:
           type: approval
-          context: aws
           requires:
             - setup
-          filters:
-            branches:
-              only:
-                - master
+      - prod_cd:
+          <<: *work_prod_cd
