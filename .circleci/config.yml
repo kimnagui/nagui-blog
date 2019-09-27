@@ -8,15 +8,13 @@ template_work_test_cd: &work_test_cd
   context: aws # test context : aws + server env var
 
 template_work_stag_cd: &work_stag_cd
-  # type: approval
   requires:
-    - test_cd
+    - hold
   context: aws # stag context : aws + server env var
 
 template_work_prod_cd: &work_prod_cd
-  type: approval
   requires:
-    - setup
+    - hold
   context: aws # prod context : aws + server env var
 
 template_job_common_cd: &job_common_cd
@@ -63,25 +61,21 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       # 설정 변경 로직 추가할 곳
-      - run:
-          name: Deploy TEST
-          command: 'yarn build && yarn deploy'
+      # - run:
+      #     name: Deploy TEST
+      #     command: 'yarn build && yarn deploy'
       - run:
           name: Echo TEST
           command: echo 'TEST'
   stag_cd:
-    # <<: *job_common_cd
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/application
-    # executor: aws-cli/default
+    <<: *job_common_cd
     steps:
-      # - aws-cli/setup:
-      #     profile-name: default
-      # - restore_cache:
-      #     key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
-      # - restore_cache:
-      #     key: dependency-cache-{{ checksum "package.json" }}
+      - aws-cli/setup:
+          profile-name: default
+      - restore_cache:
+          key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       # 설정 변경 로직 추가할 곳
       # - run:
       #     name: Deploy STAG
@@ -90,22 +84,18 @@ jobs:
           name: Echo STAG
           command: echo 'STAG'
   prod_cd:
-    # <<: *job_common_cd
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/application
-    # executor: aws-cli/default
+    <<: *job_common_cd
     steps:
-      # - aws-cli/setup:
-      #     profile-name: default
-      # - restore_cache:
-      #     key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
-      # - restore_cache:
-      #     key: dependency-cache-{{ checksum "package.json" }}
+      - aws-cli/setup:
+          profile-name: default
+      - restore_cache:
+          key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       # 설정 변경 로직 추가할 곳
-      # - run:
-      #     name: Deploy PROD
-      #     command: 'yarn build && yarn deploy'
+      - run:
+          name: Deploy PROD
+          command: 'yarn build && yarn deploy'
       - run:
           name: Echo PROD
           command: echo 'PROD'
@@ -128,6 +118,10 @@ workflows:
                 - /release.*/
       - test_cd:
           <<: *work_test_cd
+      - hold:
+          type: approval
+          requires:
+            - test_cd
       - stag_cd:
           <<: *work_stag_cd
   commit_release_build:
@@ -139,6 +133,10 @@ workflows:
                 - /release.*/
       - test_cd:
           <<: *work_test_cd
+      - hold:
+          type: approval
+          requires:
+            - test_cd
       - stag_cd:
           <<: *work_stag_cd
   commit_production_build:
@@ -148,5 +146,9 @@ workflows:
             branches:
               only:
                 - master
+      - hold:
+          type: approval
+          requires:
+            - setup
       - prod_cd:
           <<: *work_prod_cd
