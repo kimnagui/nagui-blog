@@ -2,22 +2,6 @@ version: 2.1
 
 #################################################################################
 
-template_job_build_and_deploy: &job_build_and_deploy
-  docker:
-    - image: circleci/node:latest
-  working_directory: ~/application
-  executor: aws-cli/default
-  # steps:
-  #   - aws-cli/setup:
-  #       profile-name: default
-  #   - restore_cache:
-  #       key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
-  #   - restore_cache:
-  #       key: dependency-cache-{{ checksum "package.json" }}
-  #   - run:
-  #       name: Deploy
-  #       command: 'yarn build && yarn deploy'
-
 template_work_test_cd: &work_test_cd
   requires:
     - setup
@@ -41,8 +25,6 @@ template_cd_stag: &work_stag_cd
 template_cd_prod: &work_prod_cd
   requires:
     - setup
-    - test_cd
-    - stag_cd
   type: approval
   context: aws # prod context : aws + server env var
   filters:
@@ -50,15 +32,6 @@ template_cd_prod: &work_prod_cd
       only:
         - master
 
-template_common_workflow_jobs: &common_workflow_jobs
-  jobs:
-    - setup
-    - test_cd: # test
-        <<: *work_test_cd
-    - stag_cd: # stag
-        <<: *work_stag_cd
-    - prod_cd: # prod
-        <<: *work_prod_cd
 
 #################################################################################
 
@@ -73,7 +46,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Update npm
+          name: Update NPM
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -89,7 +62,10 @@ jobs:
           paths:
             - ~/application
   test_cd:
-    <<: *job_build_and_deploy
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/application
+    executor: aws-cli/default
     steps:
       - aws-cli/setup:
           profile-name: default
@@ -97,41 +73,50 @@ jobs:
           key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
+      # 설정 변경 로직 추가할 곳
       - run:
-          name: Deploy
+          name: Deploy TEST
           command: 'yarn build && yarn deploy'
       - run:
-          name: Echo
+          name: Echo TEST
           command: echo 'TEST'
   stag_cd:
-    <<: *job_build_and_deploy
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/application
+    executor: aws-cli/default
     steps:
-      - aws-cli/setup:
-          profile-name: default
-      - restore_cache:
-          key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+      # - aws-cli/setup:
+      #     profile-name: default
+      # - restore_cache:
+      #     key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
+      # - restore_cache:
+      #     key: dependency-cache-{{ checksum "package.json" }}
+      # 설정 변경 로직 추가할 곳
+      # - run:
+      #     name: Deploy STAG
+      #     command: 'yarn build && yarn deploy'
       - run:
-          name: Deploy
-          command: 'yarn build && yarn deploy'
-      - run:
-          name: Echo
+          name: Echo STAG
           command: echo 'STAG'
   prod_cd:
-    <<: *job_build_and_deploy
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/application
+    executor: aws-cli/default
     steps:
-      - aws-cli/setup:
-          profile-name: default
-      - restore_cache:
-          key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+      # - aws-cli/setup:
+      #     profile-name: default
+      # - restore_cache:
+      #     key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
+      # - restore_cache:
+      #     key: dependency-cache-{{ checksum "package.json" }}
+      # 설정 변경 로직 추가할 곳
+      # - run:
+      #     name: Deploy PROD
+      #     command: 'yarn build && yarn deploy'
       - run:
-          name: Deploy
-          command: 'yarn build && yarn deploy'
-      - run:
-          name: Echo
+          name: Echo PROD
           command: echo 'PROD'
 
 workflows:
@@ -144,6 +129,21 @@ workflows:
             branches:
               only:
                 - /release.*/
-    <<: *common_workflow_jobs
+    jobs:
+      - setup
+      - test_cd:
+          <<: *work_test_cd
+      - stag_cd:
+          <<: *work_stag_cd
   commit_build:
-    <<: *common_workflow_jobs
+    jobs:
+      - setup
+      - test_cd:
+          <<: *work_test_cd
+      - stag_cd:
+          <<: *work_stag_cd
+  commit_prod:
+    jobs:
+      - setup
+      - prod_cd:
+          <<: *work_prod_cd
