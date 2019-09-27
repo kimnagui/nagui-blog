@@ -8,15 +8,15 @@ template_work_test_cd: &work_test_cd
   context: aws # test context : aws + server env var
 
 template_work_stag_cd: &work_stag_cd
+  type: approval
   requires:
     - test_cd
-  type: approval
   context: aws # stag context : aws + server env var
 
 template_work_prod_cd: &work_prod_cd
+  type: approval
   requires:
     - setup
-  type: approval
   context: aws # prod context : aws + server env var
 
 template_job_common_cd: &job_common_cd
@@ -24,7 +24,6 @@ template_job_common_cd: &job_common_cd
     - image: circleci/node:latest
   working_directory: ~/application
   executor: aws-cli/default
-
 
 #################################################################################
 
