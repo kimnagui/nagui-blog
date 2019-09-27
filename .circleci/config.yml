@@ -1,17 +1,71 @@
 version: 2.1
 
+#################################################################################
+
+template_job_build_and_deploy: &job_build_and_deploy
+  docker:
+    - image: circleci/node:latest
+  working_directory: ~/application
+  executor: aws-cli/default
+  steps:
+    - aws-cli/setup:
+        profile-name: default
+    - restore_cache:
+        key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+    - run:
+        name: Deploy
+        command: 'yarn build && yarn deploy'
+
+template_work_test_cd: &work_test_cd
+  requires:
+    - setup
+  context: aws # test context : aws + server env var
+  filters:
+    branches:
+      only:
+        - /release.*/
+
+template_cd_stag: &work_stag_cd
+  requires:
+    - setup
+    - test_cd
+  type: approval
+  context: aws # stag context : aws + server env var
+  filters:
+    branches:
+      only:
+        - /release.*/
+
+template_cd_prod: &work_prod_cd
+  requires:
+    - setup
+    - test_cd
+    - stag_cd
+  type: approval
+  context: aws # prod context : aws + server env var
+  filters:
+    branches:
+      only:
+        - master
+
+template_common_workflow_jobs: &common_workflow_jobs
+  jobs:
+    - setup
+    - test_cd: # test
+        <<: *work_test_cd
+    - stag_cd: # stag
+        <<: *work_stag_cd
+    - prod_cd: # prod
+        <<: *work_prod_cd
+
+#################################################################################
+
 orbs:
   aws-cli: circleci/aws-cli@0.1.16
 
 jobs:
-  test:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/test
-    steps:
-      - run:
-          name: Test
-          command: echo "gg !!"
   setup:
     docker:
       - image: circleci/node:latest
@@ -31,45 +85,26 @@ jobs:
           paths:
             - node_modules
       - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          key: repo-$CIRCLE_BUILD_NUM-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/application
-  build_and_deploy:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/application
-    executor: aws-cli/default
-    steps:
-      - aws-cli/setup:
-          profile-name: default
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Deploy
-          command: 'yarn build && yarn deploy'
+  test_cd:
+    <<: *job_build_and_deploy
+  stag_cd:
+    <<: *job_build_and_deploy
+  prod_cd:
+    <<: *job_build_and_deploy
+
 workflows:
   version: 2.1
-  nightly:
+  schedule_build:
     triggers:
       - schedule:
-          cron: "0 1 * * *"
+          cron: "0 19 * * *"
           filters:
             branches:
               only:
-                - master
-    jobs:
-      - test
-  build:
-    jobs:
-      - setup
-      - build_and_deploy:
-          type: approval
-          context: aws
-          requires:
-            - setup
-          filters:
-            branches:
-              only:
-                - master
+                - /release.*/
+    <<: *common_workflow_jobs
+  commit_build:
+    <<: *common_workflow_jobs
