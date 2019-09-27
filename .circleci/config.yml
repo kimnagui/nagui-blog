@@ -6,31 +6,24 @@ template_work_test_cd: &work_test_cd
   requires:
     - setup
   context: aws # test context : aws + server env var
-  filters:
-    branches:
-      only:
-        - /release.*/
 
-template_cd_stag: &work_stag_cd
+template_work_stag_cd: &work_stag_cd
   requires:
-    - setup
     - test_cd
   type: approval
   context: aws # stag context : aws + server env var
-  filters:
-    branches:
-      only:
-        - /release.*/
 
-template_cd_prod: &work_prod_cd
+template_work_prod_cd: &work_prod_cd
   requires:
     - setup
   type: approval
   context: aws # prod context : aws + server env var
-  filters:
-    branches:
-      only:
-        - master
+
+template_job_common_cd: &job_common_cd
+  docker:
+    - image: circleci/node:latest
+  working_directory: ~/application
+  executor: aws-cli/default
 
 
 #################################################################################
@@ -62,10 +55,7 @@ jobs:
           paths:
             - ~/application
   test_cd:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/application
-    executor: aws-cli/default
+    <<: *job_common_cd
     steps:
       - aws-cli/setup:
           profile-name: default
@@ -81,10 +71,11 @@ jobs:
           name: Echo TEST
           command: echo 'TEST'
   stag_cd:
+    # <<: *job_common_cd
     docker:
       - image: circleci/node:latest
     working_directory: ~/application
-    executor: aws-cli/default
+    # executor: aws-cli/default
     steps:
       # - aws-cli/setup:
       #     profile-name: default
@@ -100,10 +91,11 @@ jobs:
           name: Echo STAG
           command: echo 'STAG'
   prod_cd:
+    # <<: *job_common_cd
     docker:
       - image: circleci/node:latest
     working_directory: ~/application
-    executor: aws-cli/default
+    # executor: aws-cli/default
     steps:
       # - aws-cli/setup:
       #     profile-name: default
@@ -121,7 +113,7 @@ jobs:
 
 workflows:
   version: 2.1
-  schedule_build:
+  schedule_release_build:
     triggers:
       - schedule:
           cron: "0 19 * * *"
@@ -130,20 +122,32 @@ workflows:
               only:
                 - /release.*/
     jobs:
-      - setup
+      - setup:
+          filters:
+            branches:
+              only:
+                - /release.*/
       - test_cd:
           <<: *work_test_cd
       - stag_cd:
           <<: *work_stag_cd
-  commit_build:
+  commit_release_build:
     jobs:
-      - setup
+      - setup:
+          filters:
+            branches:
+              only:
+                - /release.*/
       - test_cd:
           <<: *work_test_cd
       - stag_cd:
           <<: *work_stag_cd
-  commit_prod:
+  commit_production_build:
     jobs:
-      - setup
+      - setup:
+          filters:
+            branches:
+              only:
+                - master
       - prod_cd:
           <<: *work_prod_cd
