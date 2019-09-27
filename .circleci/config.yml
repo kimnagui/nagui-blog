@@ -90,10 +90,22 @@ jobs:
             - ~/application
   test_cd:
     <<: *job_build_and_deploy
+    steps:
+      - run:
+          name: Test Deploy
+          command: echo "TEST"
   stag_cd:
     <<: *job_build_and_deploy
+    steps:
+      - run:
+          name: Stag Deploy
+          command: echo "STAG"
   prod_cd:
     <<: *job_build_and_deploy
+    steps:
+      - run:
+          name: Prod Deploy
+          command: echo "Prod"
 
 workflows:
   version: 2.1
