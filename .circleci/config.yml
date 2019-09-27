@@ -8,7 +8,7 @@ template_work_test_cd: &work_test_cd
   context: aws # test context : aws + server env var
 
 template_work_stag_cd: &work_stag_cd
-  type: approval
+  # type: approval
   requires:
     - test_cd
   context: aws # stag context : aws + server env var
