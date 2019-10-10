@@ -53,6 +53,10 @@ const PostContent = styled.div`
         }
     }
 
+    .gatsby-resp-image-wrapper {
+        max-width: 800px !important;
+    }
+
     blockquote {
         margin-left: 0;
         margin-right: 0;
