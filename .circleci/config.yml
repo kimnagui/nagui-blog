@@ -51,11 +51,5 @@ workflows:
             branches:
               only:
                 - master
-      - hold:
-          type: approval
-          requires:
-            - setup
       - build_and_deploy:
-          requires:
-            - hold
           context: aws
