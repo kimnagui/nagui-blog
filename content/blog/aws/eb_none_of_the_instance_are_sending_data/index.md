@@ -56,8 +56,8 @@ https://stackoverflow.com/questions/32364229/aws-none-of-the-instances-are-sendi
 
 ![](./eb_deploy_exist_version.png)
 
-**성 ㅡ 공**
+> **성 ㅡ 공**
 
 ![](./eb_deploy_success.png)
 
-공짜 프리티어 이용하려다가 금쪽같은 시간낭비했다…
+프리티어로는 안된다니 .... 😞
