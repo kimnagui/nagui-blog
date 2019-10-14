@@ -9,8 +9,11 @@ tags:
 cover: ../aws.png
 ---
 
-AWS EB 에 어플리케이션을 생성하고 test , staging , prod 환경을 구성한 후
-local 에서 eb deploy 중 `None of the Instances are sending data` 라는 에러가 발생했다.
+AWS EB 에 어플리케이션을 생성하고 test , staging , prod 환경을 구성한 후 local 에서 eb deploy 중
+
+**"None of the Instances are sending data"**
+
+라는 에러가 발생했다.
 
 eb deploy 를 실행했던 터미널에서는 Timeout Error 발생
 
@@ -41,7 +44,7 @@ https://code-examples.net/ko/q/1edd6c5
 https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/vpc.html
 ![](./ntp_problem2.png)
 
-하지만 해당 보안그룹에 UDP 123 허용해도 안됨.
+**하지만 해당 보안그룹에 UDP 123 허용해도 안됨.**
 
 ## 2. EC2 인스턴스 문제
 
@@ -56,7 +59,7 @@ https://stackoverflow.com/questions/32364229/aws-none-of-the-instances-are-sendi
 
 ![](./eb_deploy_exist_version.png)
 
-> **성 ㅡ 공**
+**성 ㅡ 공**
 
 ![](./eb_deploy_success.png)
 

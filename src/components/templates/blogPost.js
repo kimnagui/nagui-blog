@@ -13,6 +13,7 @@ const PostHeader = styled.div`
         margin-bottom: 10px;
         border: none;
         color: ${props => props.theme.blogpost.title};
+        line-height: 1.5;
     }
 
     hr {

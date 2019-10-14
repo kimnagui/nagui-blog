@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
-const StyledLink = styled(Link)`
-    margin: 5px 10px 5px 0;
-`;
+const StyledLink = styled(Link)``;
 
-const StyledButton = styled.span`
+const StyledButton = styled.div`
+    display: inline-block;
+    margin: 5px;
     padding: 5px 10px;
     border-radius: 5px;
 
