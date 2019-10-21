@@ -43,7 +43,8 @@ const PostContent = styled.div`
         margin-top: 50px;
         padding: 5px;
         color: #000;
-        background-color: #49c39e;
+        background-color: ${props => props.theme.blogpost.content.header};
+        border-radius: 10px;
     }
 
     .gatsby-highlight {

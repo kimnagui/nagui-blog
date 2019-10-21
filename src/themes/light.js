@@ -1,30 +1,36 @@
+const colorSet = {
+    highlight: "#ff6464",
+    background: "#042f4b",
+    readableText: "#24292e"
+};
+
 export default {
     main: {
         defaultBack: "#fff",
         defaultText: "#000",
         overlayBack: "#000",
         header: {
-            back: "#3f0f3f",
+            back: colorSet.background,
             text: "#fff",
             button: "#fff"
         }
     },
     side: {
-        defaultBack: "#3f0f3f",
+        defaultBack: colorSet.background,
         defaultText: "#fff",
         bio: {
-            circle: "#49c39e",
+            circle: colorSet.highlight,
             defaultText: "#999",
             activeText: "#fff"
         },
         category: {
             activeText: "#000",
-            activeBack: "#49c39e"
+            activeBack: colorSet.highlight
         }
     },
     bio: {
         defaultBack: "#fff",
-        defaultText: "#000",
+        defaultText: colorSet.readableText,
         subText: "#999",
         socialButton: "#000"
     },
@@ -36,16 +42,17 @@ export default {
     pagination: {
         defaultText: "#999",
         activeText: "#fff",
-        activeBack: "#3f0f3f"
+        activeBack: colorSet.background
     },
     blogpost: {
         title: "#000",
         info: "#999",
         hr: "#999",
         content: {
-            default: "#000",
+            default: colorSet.readableText,
             quote: "#999",
-            link: "#0687f0"
+            link: "#0687f0",
+            header: colorSet.highlight
         }
     },
     tag: {
@@ -53,7 +60,7 @@ export default {
         text: "#4d4d4d"
     },
     recentpostlist: {
-        header: "#000",
+        header: colorSet.readableText,
         category: "#0687f0"
     },
     recentpostitem: {
