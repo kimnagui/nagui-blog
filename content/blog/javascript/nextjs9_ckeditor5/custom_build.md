@@ -96,7 +96,7 @@ export default Home;
 
 이제 프로젝트를 실행해보면 아래와 같은 에러가 난다.
 
-![](./build_fail1.png)
+![](./custom_build/build_fail1.png)
 
 css 파일을 못읽으니 webpack 설정을 해주자.
 
@@ -124,7 +124,7 @@ module.exports = withCSS(
 
 css 에러를 해결하고나면 서버콘솔에서 window 객체 를 찾을 수 없다고 나오는데,
 
-![](./build_fail2.png)
+![](./custom_build/build_fail2.png)
 
 nextjs는 기본적으로 ssr을 지원하는데 ckeditor5가 window 객체를 무조건 필요로 하기때문에 에러가 난다.
 
@@ -151,7 +151,7 @@ export default Home;
 
 이제 실행하면 정상적으로 나온다.
 
-![](./build_success1.png)
+![](./custom_build/build_success1.png)
 
 ## 4. 커스터마이징 하기
 
@@ -199,7 +199,7 @@ import TableToolbar from "@ckeditor/ckeditor5-table/src/tabletoolbar";
 import TextTransformation from "@ckeditor/ckeditor5-typing/src/texttransformation";
 import Indent from "@ckeditor/ckeditor5-indent/src/indent";
 import IndentBlock from "@ckeditor/ckeditor5-indent/src/indentblock";
-import SimpleUploadAdapter from "@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter";
+import Base64UploadAdapter from "@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter";
 
 class App extends Component {
     render() {
@@ -241,7 +241,7 @@ class App extends Component {
                         ImageToolbar,
                         ImageUpload,
                         ImageResize,
-                        SimpleUploadAdapter,
+                        Base64UploadAdapter,
                         Table,
                         TableToolbar,
                         TextTransformation
@@ -358,13 +358,6 @@ class App extends Component {
                                 "threeQuarters"
                             ]
                         }
-                    },
-                    simpleUpload: {
-                        uploadUrl: "http://your.upload.url",
-                        headers: {
-                            "X-CSRF-TOKEN": "CSFR-Token"
-                            // Authorization: 'Bearer <JSON Web Token>'
-                        }
                     }
                 }}
                 editor={ClassicEditor}
@@ -380,7 +373,7 @@ export default App;
 
 위에서 수정한데로 프로젝트를 실행하면 실행도 안되고, 빌드하면 아래와 같이 에러가 뜰 것이다.
 
-![](./build_fail3.png)
+![](./custom_build/build_fail3.png)
 
 이것도 결국 webpack 처리를 해줘야한다.
 
@@ -542,7 +535,9 @@ webpack(config, options) {
 
 이제 실행해보면 아래와 같이 잘 나온다.
 
-![](./build_success2.png)
+![](./custom_build/build_success2.png)
+
+![](./custom_build/image_upload_success1.png)
 
 ## 7. ckeditor5 아쉬운 점
 

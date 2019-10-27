@@ -41,8 +41,8 @@ const PostContent = styled.div`
     h2 {
         display: inline-block;
         margin-top: 50px;
-        padding: 5px;
-        color: #000;
+        margin-bottom: 25px;
+        padding: 8px;
         background-color: ${props => props.theme.blogpost.content.header};
         border-radius: 10px;
     }
