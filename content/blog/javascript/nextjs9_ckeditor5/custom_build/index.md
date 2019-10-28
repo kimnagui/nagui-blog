@@ -6,7 +6,7 @@ tags:
     - nextjs
     - ckeditor5
     - webpack
-cover: ./ckeditor5_logo.jpeg
+cover: ../ckeditor5_logo.jpeg
 ---
 
 과거 react 프로젝트를 할때 ckeditor5 붙이는 작업을 했었는데 webpack 지원이 미완성일때라 에디터를 커스텀하려면 따로 저장소를 만들어서 빌드한 결과물을 사용해야 했었다.
@@ -96,7 +96,7 @@ export default Home;
 
 이제 프로젝트를 실행해보면 아래와 같은 에러가 난다.
 
-![](./custom_build/build_fail1.png)
+![](./build_fail1.png)
 
 css 파일을 못읽으니 webpack 설정을 해주자.
 
@@ -124,7 +124,7 @@ module.exports = withCSS(
 
 css 에러를 해결하고나면 서버콘솔에서 window 객체 를 찾을 수 없다고 나오는데,
 
-![](./custom_build/build_fail2.png)
+![](./build_fail2.png)
 
 nextjs는 기본적으로 ssr을 지원하는데 ckeditor5가 window 객체를 무조건 필요로 하기때문에 에러가 난다.
 
@@ -151,7 +151,7 @@ export default Home;
 
 이제 실행하면 정상적으로 나온다.
 
-![](./custom_build/build_success1.png)
+![](./build_success1.png)
 
 ## 4. 커스터마이징 하기
 
@@ -373,7 +373,7 @@ export default App;
 
 위에서 수정한데로 프로젝트를 실행하면 실행도 안되고, 빌드하면 아래와 같이 에러가 뜰 것이다.
 
-![](./custom_build/build_fail3.png)
+![](./build_fail3.png)
 
 이것도 결국 webpack 처리를 해줘야한다.
 
@@ -535,9 +535,9 @@ webpack(config, options) {
 
 이제 실행해보면 아래와 같이 잘 나온다.
 
-![](./custom_build/build_success2.png)
+![](./build_success2.png)
 
-![](./custom_build/image_upload_success1.png)
+![](./image_upload_success1.png)
 
 ## 7. ckeditor5 아쉬운 점
 

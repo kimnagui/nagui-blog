@@ -9,7 +9,7 @@ tags:
     - s3
     - image
     - upload
-cover: ./ckeditor5_logo.jpeg
+cover: ../ckeditor5_logo.jpeg
 ---
 
 지난 포스트([nextjs + ckeditor5 custom build](http://nagui.me/javascript/nextjs9_ckeditor5/))에 이어 이번엔 ckeditor5 에서 이미지 업로드 구현을 포스팅한다.
@@ -30,11 +30,11 @@ ckeditor는 ckfinder나 easyimage 같은 유료서비스를 제공하고 이를 
 
 #### (1) AWS S3 버킷 생성 및 정책 설정
 
-![](./image_upload/s3_create/1.png)
-![](./image_upload/s3_create/2.png)
-![](./image_upload/s3_create/3.png)
-![](./image_upload/s3_create/4.png)
-![](./image_upload/s3_create/5.png)
+![](./s3_create/1.png)
+![](./s3_create/2.png)
+![](./s3_create/3.png)
+![](./s3_create/4.png)
+![](./s3_create/5.png)
 
 간단하게 이름지정하고 퍼블릭 엑세스 차단만 비활성화 시켜준다.
 
@@ -62,29 +62,29 @@ ckeditor는 ckfinder나 easyimage 같은 유료서비스를 제공하고 이를 
 
 때문에 별도의 IAM 유저를 만들어서 해당 유저에만 쓰기권한을 부여할 것이다.
 
-![](./image_upload/iam_create/1.png)
+![](./iam_create/1.png)
 
 엑세스 유형은 `프로그래밍 방식 엑세스`만 선택하고
 
-![](./image_upload/iam_create/2.png)
+![](./iam_create/2.png)
 
 다음으로 계속 넘기다가 `"액세스 키 ID"와 "비밀 엑세스키"`가 나올때 잘 복사하거나 csv를 다운로드 해둔다.
 
-![](./image_upload/iam_create/3.png)
+![](./iam_create/3.png)
 
 이제 IAM 유저는 생성이 되었으므로 이 유저에 연결할 정책을 만들어야 한다.
 
-![](./image_upload/iam_create/4.png)
+![](./iam_create/4.png)
 
 JSON 형식으로 정책을 입력하고
 
-![](./image_upload/iam_create/5.png)
+![](./iam_create/5.png)
 
 정책의 이름을 입력해서 정책 생성을 완료한다.
 
-![](./image_upload/iam_create/6.png)
+![](./iam_create/6.png)
 
-![](./image_upload/iam_create/7.png)
+![](./iam_create/7.png)
 
 그리고 이 정책을 사용자에 연결하면 AWS에서의 설정은 완료!
 
@@ -264,7 +264,7 @@ class App extends Component {
 
 이제 `yarn dev` 명령어로 실행시켜서 업로드해보면
 
-![](./image_upload/upload_test/1.png)
+![](./upload_test/1.png)
 
 AWS S3 Bucket에 정확히 업로드된 것을 확인할 수 있다.
 
