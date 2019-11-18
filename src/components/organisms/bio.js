@@ -53,6 +53,11 @@ const BioSocial = styled.div`
 
     span {
         margin-right: 5px;
+        i:last-child {
+            &:before {
+                color: #000;
+            }
+        }
     }
 `;
 

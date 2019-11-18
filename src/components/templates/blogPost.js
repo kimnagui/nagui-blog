@@ -31,35 +31,41 @@ const PostHeader = styled.div`
 
 const PostContent = styled.div`
     color: ${props => props.theme.blogpost.content.default};
+    line-height: 2;
+
     a {
         color: ${props => props.theme.blogpost.content.link};
-        &:hover {
-            text-decoration: underline;
-        }
+        /* &:hover { */
+        text-decoration: underline;
+        /* } */
+    }
+
+    code {
+        background-color: #1e1e1e;
+        padding: 8px;
+        border-radius: 5px;
     }
 
     h2 {
         display: inline-block;
-        margin-top: 50px;
+        margin-top: 60px;
         margin-bottom: 25px;
-        padding: 8px;
-        background-color: ${props => props.theme.blogpost.content.header};
-        border-radius: 10px;
+        color: ${props => props.theme.blogpost.content.heading};
     }
 
-    .gatsby-highlight {
-        margin: 24px 0;
-        border-radius: 10px;
-        pre[class*="language-"] {
-            padding: 10px 15px;
-        }
+    h3,
+    h4 {
+        color: ${props => props.theme.blogpost.content.heading};
     }
 
     .gatsby-resp-image-wrapper {
-        max-width: 800px !important;
+        margin: 35px 0;
     }
 
     blockquote {
+        p {
+            margin-left: 0;
+        }
         margin-left: 0;
         margin-right: 0;
         padding-left: calc(0.8125rem - 1px);

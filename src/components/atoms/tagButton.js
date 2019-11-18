@@ -6,12 +6,10 @@ const StyledLink = styled(Link)``;
 
 const StyledButton = styled.div`
     display: inline-block;
-    margin: 5px;
-    padding: 5px 10px;
+    margin: 5px 8px;
     border-radius: 5px;
 
     color: ${props => props.theme.tag.text};
-    background-color: ${props => props.theme.tag.back};
     font-size: 15px;
 
     &:hover {

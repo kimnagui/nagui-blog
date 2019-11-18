@@ -6,6 +6,7 @@ import RecentPostItem from "components/molecules/recentPostItem";
 const PostList = styled.div`
     #title {
         font-weight: bold;
+        font-size: 20px;
         margin: 0;
         padding: 0 10px 10px 10px;
         color: ${props => props.theme.recentpostlist.header};
@@ -23,8 +24,9 @@ const RecentPostList = ({ category, data }) => {
     return (
         <PostList>
             <div id="title">
-                Recent "<Link to={`/category/${category}`}>{category}</Link>"
-                Posts
+                {"Recent "}
+                <Link to={`/category/${category}`}>{category}</Link>
+                {" Posts"}
             </div>
             {data.map((node, index) => (
                 <RecentPostItem key={index} data={node} />

@@ -1,69 +1,77 @@
 const colorSet = {
-    highlight: "#ff6464",
-    background: "#042f4b",
-    readableText: "#24292e"
+    highlight: "#50fa7b",
+    hardBackground: "#1c1c1c",
+    softBackground: "#282a36",
+    readableText: "#f8f8f2",
+    subText: "#999",
+    white: "#f8f8f2",
+    heading: "#50fa7b",
+    link: "#0687f0"
 };
 
 export default {
     main: {
-        defaultBack: "#fff",
-        defaultText: "#000",
-        overlayBack: "#000",
+        defaultBack: colorSet.softBackground,
+        defaultText: colorSet.hardBackground,
+        overlayBack: colorSet.hardBackground,
         header: {
-            back: colorSet.background,
-            text: "#fff",
-            button: "#fff"
+            back: colorSet.hardBackground,
+            text: colorSet.white,
+            button: colorSet.white
         }
     },
     side: {
-        defaultBack: colorSet.background,
-        defaultText: "#fff",
+        defaultBack: colorSet.hardBackground,
+        defaultText: colorSet.white,
         bio: {
             circle: colorSet.highlight,
-            defaultText: "#999",
-            activeText: "#fff"
+            defaultText: colorSet.subText,
+            activeText: colorSet.white
         },
         category: {
-            activeText: "#000",
+            activeText: colorSet.hardBackground,
             activeBack: colorSet.highlight
         }
     },
     bio: {
-        defaultBack: "#fff",
+        defaultBack: colorSet.softBackground,
         defaultText: colorSet.readableText,
-        subText: "#999",
-        socialButton: "#000"
+        subText: colorSet.subText,
+        socialButton: colorSet.highlight
     },
     postlistitem: {
-        title: "#000",
-        content: "#999",
-        info: "#000"
+        title: colorSet.readableText,
+        content: colorSet.subText,
+        info: colorSet.highlight
     },
     pagination: {
-        defaultText: "#999",
-        activeText: "#fff",
-        activeBack: colorSet.background
+        defaultText: colorSet.white,
+        activeText: colorSet.hardBackground,
+        activeBack: colorSet.highlight
     },
     blogpost: {
-        title: "#000",
-        info: "#999",
-        hr: "#999",
+        title: colorSet.readableText,
+        info: colorSet.highlight,
+        hr: colorSet.readableText,
         content: {
             default: colorSet.readableText,
-            quote: "#999",
-            link: "#0687f0",
-            header: colorSet.highlight
+            quote: colorSet.highlight,
+            link: colorSet.link,
+            heading: colorSet.heading
+        },
+        code: {
+            back: colorSet.hardBackground
         }
     },
     tag: {
-        back: "#d9d9d9",
-        text: "#4d4d4d"
+        back: "#ffb86c",
+        text: "#ffb86c"
     },
     recentpostlist: {
         header: colorSet.readableText,
-        category: "#0687f0"
+        category: colorSet.link
     },
     recentpostitem: {
-        text: "#fff"
+        text: colorSet.white
     }
 };
