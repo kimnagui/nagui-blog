@@ -55,7 +55,7 @@ export default {
         hr: colorSet.readableText,
         content: {
             default: colorSet.readableText,
-            quote: colorSet.highlight,
+            quote: "#bd93f9",//colorSet.highlight,
             link: colorSet.link,
             heading: colorSet.heading
         },

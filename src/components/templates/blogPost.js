@@ -51,6 +51,8 @@ const PostContent = styled.div`
         margin-top: 60px;
         margin-bottom: 25px;
         color: ${props => props.theme.blogpost.content.heading};
+        text-decoration: underline;
+        text-underline-position: under;
     }
 
     h3,
