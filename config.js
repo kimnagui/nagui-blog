@@ -14,17 +14,17 @@ module.exports = {
     // icon : FontAwesome
     category: [
         {
+            id: "공부",
+            icon: "fa-book-open"
+        },
+        {
             id: "일상",
             icon: "fa-grin-alt"
-        },
+        }
         // {
         //     id: "여행",
         //     icon: "fa-plane-departure"
         // }
-        {
-            id: "공부",
-            icon: "fa-book-open"
-        }
     ],
 
     social: {
