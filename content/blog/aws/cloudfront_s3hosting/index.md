@@ -124,11 +124,15 @@ Route 53 에서 nagui.me 의 A 레코드를 CloudFront의 도메인으로 저장
 
 ### (1) cloudfront distribution 생성하고 나서 www.example.com이 index.html을 가리키지 않을 때
 
+![](./error-default_root.png)
+
 -   버킷정책 확인 : https://aws.amazon.com/ko/premiumsupport/knowledge-center/s3-website-cloudfront-error-403/
 
 -   기본 루트 객체 지정 : https://docs.aws.amazon.com/ko_kr/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html
 
 ### (2) cloudfront distribution의 “Alternate Domain Names (CNAMEs)” 변경이 안될때
+
+![](./error-ssl_domain.png)
 
 -   SSL인증서에 해당 도메인을 포함시켰는지 확인
 
