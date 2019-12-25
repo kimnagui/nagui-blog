@@ -17,6 +17,8 @@ AWS EB 에 어플리케이션을 생성하고 test , staging , prod 환경을 �
 
 eb deploy 를 실행했던 터미널에서는 Timeout Error 발생
 
+<!-- end -->
+
 ![](./terminal_timeout.png)
 
 ![](./aws_console_event.png)
