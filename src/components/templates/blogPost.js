@@ -35,9 +35,7 @@ const PostContent = styled.div`
 
     a {
         color: ${props => props.theme.blogpost.content.link};
-        /* &:hover { */
         text-decoration: underline;
-        /* } */
     }
 
     code {
@@ -51,8 +49,6 @@ const PostContent = styled.div`
         margin-top: 60px;
         margin-bottom: 25px;
         color: ${props => props.theme.blogpost.content.heading};
-        text-decoration: underline;
-        text-underline-position: under;
     }
 
     h3,
@@ -145,7 +141,7 @@ export const pageQuery = graphql`
         }
         markdownRemark(fields: { slug: { eq: $slug } }) {
             id
-            excerpt(pruneLength: 160)
+            excerpt(pruneLength: 300)
             html
             frontmatter {
                 title
