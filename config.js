@@ -14,7 +14,7 @@ module.exports = {
     // icon : FontAwesome
     category: [
         {
-            id: "공부",
+            id: "개발",
             icon: "fa-book-open"
         },
         {

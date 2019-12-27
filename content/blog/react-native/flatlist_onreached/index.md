@@ -1,7 +1,7 @@
 ---
 title: "[ReactNative] FlatList의 onEndReached 이슈"
 date: "2019-08-10"
-category: "공부"
+category: "개발"
 tags:
     - ReactNative
     - FlatList

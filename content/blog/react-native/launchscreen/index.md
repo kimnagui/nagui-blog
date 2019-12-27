@@ -1,7 +1,7 @@
 ---
 title: "[ReactNative] Launch Screen 과 Splash Screen"
 date: "2019-09-05"
-category: "공부"
+category: "개발"
 tags:
     - ReactNative
     - Launch Screen

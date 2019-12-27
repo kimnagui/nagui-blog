@@ -1,7 +1,7 @@
 ---
 title: "[Ckeditor5] NextJS에서 Ckeditor5 커스텀빌드 사용하기"
 date: "2019-10-11"
-category: "공부"
+category: "개발"
 tags:
     - nextjs
     - ckeditor5

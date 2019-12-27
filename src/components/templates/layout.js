@@ -18,6 +18,8 @@ const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
         padding: 0;
+        letter-spacing: 0.05em;
+        word-spacing: 0.2em;
 
         a {
             text-decoration: none;

@@ -1,7 +1,7 @@
 ---
 title: "[Ckeditor5] NextJS + Ckeditor5 + S3 이미지 업로드하기"
 date: "2019-10-20"
-category: "공부"
+category: "개발"
 tags:
     - nextjs
     - ckeditor5

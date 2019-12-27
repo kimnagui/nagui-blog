@@ -1,7 +1,7 @@
 ---
 title: "[AWS] Codecommit unable to access 403"
 date: "2019-08-08"
-category: "공부"
+category: "개발"
 tags:
     - AWS
     - Codecommit

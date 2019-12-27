@@ -1,7 +1,7 @@
 ---
 title: "[AWS] S3 호스팅에 Cloudfront 연결"
 date: "2019-11-20"
-category: "공부"
+category: "개발"
 tags:
     - AWS
     - S3
@@ -11,7 +11,7 @@ cover: ../aws.png
 
 AWS로 운영하면서 cloudfront 연동을 별로 해본적이 없었다.
 
-때문에 다시 공부할겸 가장 기본적인 s3 hosting에 cloudfront를 연동하기를 해볼겸 개인블로그에 cloudfront를 연동했다.
+때문에 다시 개발할겸 가장 기본적인 s3 hosting에 cloudfront를 연동하기를 해볼겸 개인블로그에 cloudfront를 연동했다.
 
 어찌어찌 연결만 해둔 상태이기때문에 이 포스트를 보시는 분들은 참고만 해주시길 바랍니다.
 

@@ -27,7 +27,7 @@ exports.createPages = ({ graphql, actions }) => {
                                 date(formatString: "YYYY-MM-DD")
                                 cover {
                                     childImageSharp {
-                                        fixed(width: 1000) {
+                                        fixed(width: 240) {
                                             src
                                         }
                                     }

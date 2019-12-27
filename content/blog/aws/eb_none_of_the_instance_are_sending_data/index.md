@@ -1,7 +1,7 @@
 ---
 title: "[AWS] Elastic Beanstalk Error : None of the Instances are sending data"
 date: "2019-10-10"
-category: "공부"
+category: "개발"
 tags:
     - AWS
     - EB

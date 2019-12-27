@@ -33,6 +33,36 @@ const PostContent = styled.div`
     color: ${props => props.theme.blogpost.content.default};
     line-height: 2;
 
+    div.series {
+        display: inline-block;
+        margin: 45px 0;
+        border: 2px solid ${props => props.theme.blogpost.content.heading};
+        padding: 20px;
+        div.title {
+            color: ${props => props.theme.blogpost.content.heading};
+            font-size: 150%;
+        }
+
+        ol {
+            margin-bottom: 0;
+            list-style: none;
+            li {
+                counter-increment: li;
+                small {
+                    color: ${props => props.theme.blogpost.content.heading};
+                }
+            }
+            li:before {
+                content: counter(li)'.';
+                color: ${props => props.theme.blogpost.content.heading};
+                display: inline-block; width: 1em;
+                margin-left: -1em;
+                text-align: right;
+                margin-right: 0.5em;
+            }
+        }
+    }
+
     a {
         color: ${props => props.theme.blogpost.content.link};
         text-decoration: underline;
@@ -45,10 +75,10 @@ const PostContent = styled.div`
     }
 
     h2 {
-        display: inline-block;
         margin-top: 60px;
         margin-bottom: 25px;
         color: ${props => props.theme.blogpost.content.heading};
+        border-bottom: none;
     }
 
     h3,
@@ -60,9 +90,20 @@ const PostContent = styled.div`
         margin: 35px 0;
     }
 
+    hr {
+        color: ${props => props.theme.blogpost.content.default};
+        background-color: ${props => props.theme.blogpost.content.default};
+        margin: 45px 0;
+    }
+
     blockquote {
         p {
             margin-left: 0;
+            a.gatsby-resp-image-link {
+                span.gatsby-resp-image-wrapper {
+                    margin: 0 !important;
+                }
+            }
         }
         margin-left: 0;
         margin-right: 0;

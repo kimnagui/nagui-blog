@@ -62,7 +62,7 @@
     },
     "scripts": {
         "dev": "gatsby develop",
-        "build": "gatsby build",
+        "build": "rm -rf .cache && rm -rf public && gatsby build",
         "deploy": "gatsby-plugin-s3 deploy -y"
     }
 }
