@@ -35,7 +35,7 @@ const MainHeader = ({ sideToggle }) => {
     return (
         <StyledMainHeader>
             <MenuButton onClick={sideToggle}>
-                <i className="fas fa-bars fa-lg" />
+                <i className="fas fa-bars fa-lg" /> 
             </MenuButton>
         </StyledMainHeader>
     );
